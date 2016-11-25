@@ -34,7 +34,7 @@ string System::readFile(string filename) {
     string line;
     if (myfile.is_open()) {
         while ( getline(myfile, line) ) {
-            file_str += line;
+            file_str += (line + "\n");
         }
     }
     else {
@@ -50,10 +50,9 @@ bool System::login(string user, string hPassword) {
     vector<string> lines;
     vector<string> temp;
     split(readFile("users.txt"), '\n', lines);
-    
     for(vector<string>::iterator i = lines.begin(); i != lines.end(); ++i) {
         split(*i,':',temp);
-        if(temp.front() == user && temp.back() == hPassword) {
+        if(temp.at(0) == user && temp.at(1) == hPassword) {
             return true;
         }
     }
@@ -88,8 +87,8 @@ bool System::removeUser(string user) {
         while ( getline(myfile, line) ) {
             vector<string> temp;
             split(line,':',temp);
-            if(temp.front() != user) {
-                file_str += line;
+            if(temp.at(0) != user) {
+                file_str += (line + "\n");
             }
             else {
                 found_user = true;
