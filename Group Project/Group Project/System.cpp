@@ -27,7 +27,7 @@ void split(const string &s, char delim, vector<string> &elems) {
     }
 }
 
-string System::readFile(string filename) {
+string readFile(string filename) {
     ifstream myfile;
     myfile.open ("users.txt", ios::in);
     string file_str;
@@ -60,7 +60,36 @@ bool System::login(string user, string hPassword) {
     return false;
 }
 
+bool System::userExists(string user) {
+    fstream myfile;
+    string file_str;
+    string line;
+    bool found_user = false;
+    
+    myfile.open ("users.txt", ios::in);
+    if (myfile.is_open()) {
+        while ( getline(myfile, line) ) {
+            vector<string> temp;
+            split(line,':',temp);
+            if(temp.size() > 0 && temp.at(0) == user) {
+                found_user = true;
+            }
+        }
+    }
+    else {
+        return false;
+    }
+    
+    myfile.close();
+    
+    return found_user;
+
+}
+
 bool System::createUser(string user, string hPassword) {
+    if(userExists(user)) {
+        return false;
+    }
     fstream myfile;
     myfile.open ("users.txt", ios::out | ios::app);
     if (myfile.is_open()) {
@@ -73,7 +102,6 @@ bool System::createUser(string user, string hPassword) {
     myfile.close();
     
     return true;
-
 }
 
 bool System::removeUser(string user) {
@@ -87,7 +115,7 @@ bool System::removeUser(string user) {
         while ( getline(myfile, line) ) {
             vector<string> temp;
             split(line,':',temp);
-            if(temp.at(0) != user) {
+            if(temp.size() > 0 && temp.at(0) != user) {
                 file_str += (line + "\n");
             }
             else {

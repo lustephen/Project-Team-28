@@ -20,10 +20,10 @@ public:
     bool login(string,string);
     bool createUser(string,string);
     bool removeUser(string);
+    bool userExists(string);
 private:
     bool loggedIn;
     bool debugMode;
-    string readFile(string);
 };
 
 #endif /* System_hpp */

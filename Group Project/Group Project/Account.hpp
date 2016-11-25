@@ -16,7 +16,9 @@ using namespace std;
 class Account {
 private:
     string name;
-    string dob;
+    int month;
+    int day;
+    int year;
     string gender;
     int ufid;
 public:
@@ -24,7 +26,7 @@ public:
     string getName();
     void setName(string);
     string getDOB();
-    void setDOB(string);
+    void setDOB(int, int, int);
     int getUFID();
     void setUFID(int);
 };

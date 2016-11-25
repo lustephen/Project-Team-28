@@ -17,7 +17,7 @@ string Account::getName() {
 }
 
 string Account::getDOB() {
-    return this -> dob;
+    return to_string(this -> month) + "/" + to_string(this -> day) + "/" + to_string(this -> year);
 }
 
 int Account::getUFID() {
@@ -28,8 +28,10 @@ void Account::setName(string name) {
     this -> name = name;
 }
 
-void Account::setDOB(string dob) {
-    this -> dob = dob;
+void Account::setDOB(int mm, int dd, int yyyy) {
+    this -> month = mm;
+    this -> day = dd;
+    this -> year = yyyy;
 }
 
 void Account::setUFID(int ufid) {

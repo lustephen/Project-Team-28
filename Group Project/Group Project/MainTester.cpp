@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include "Account.hpp"
 #include "System.hpp"
-#include "hl_md5wrapper.h"
+#include "md5/hl_md5wrapper.h"
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
 
@@ -20,31 +20,42 @@ TEST_CASE( "System Tester", "[system]" ) {
     
     System system (true);
     
+    SECTION("User exists") {
+        REQUIRE( system.userExists("Admin") == true );
+    }
+    
+    SECTION("User does not exist") {
+        REQUIRE( system.userExists("TEMP_USER") == false );
+    }
+    
     SECTION("Valid login attempt") {
-        hashwrapper *md5 = new md5wrapper();
         
         REQUIRE( system.login("Admin", "Passw0rd!") == true );
     }
     
     SECTION("Invalid login attempt") {
-        hashwrapper *md5 = new md5wrapper();
         
         REQUIRE( system.login("Admin", "incorrectpassword") == false );
     }
     
-    SECTION("Create User") {
-        hashwrapper *md5 = new md5wrapper();
+    SECTION("Create User [user already exists]") {
+        REQUIRE( system.userExists("Admin") == true );
         
-        REQUIRE( system.login("Admin", "incorrectpassword") == false );
+        REQUIRE( system.createUser("Admin", "Passw0rd!") == false );
     }
     
     SECTION("Remove User [user exists]") {
-        system.createUser("TEMP_USER", "TEMP_PASSWORD");
+        hashwrapper *md5 = new md5wrapper();
+        system.createUser("TEMP_USER", md5->getHashFromString("TEMP_PASSWORD"));
+        
+        REQUIRE( system.userExists("TEMP_USER") == true );
         
         REQUIRE( system.removeUser("TEMP_USER") == true );
     }
     
     SECTION("Remove User [user does not exist]") {
+        REQUIRE( system.userExists("TEMP_USER") == false );
+        
         REQUIRE( system.removeUser("TEMP_USER") == false );
     }
 }
@@ -52,11 +63,14 @@ TEST_CASE( "System Tester", "[system]" ) {
 TEST_CASE( "AccountTester", "[account]" ) {
     string testName = "Bob";
     int testID = 98765432;
-    string testDOB = "01/01/1990";
+    int mm = 1;
+    int dd = 1;
+    int yyyy = 1990;
+    string testDOB = "1/1/1990";
     
     Account testAccount (testName);
     testAccount.setUFID(testID);
-    testAccount.setDOB(testDOB);
+    testAccount.setDOB(mm,dd,yyyy);
     
     REQUIRE( testAccount.getName() == testName);
     REQUIRE( testAccount.getUFID() == testID);
