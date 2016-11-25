@@ -16,38 +16,54 @@
 
 using namespace std;
 
-//int main(int argc, const char * argv[]) {
-//    Account testAccount ("Bob");
-//    testAccount.setUFID(74341234);
-//    testAccount.setDOB("01/01/1990");
-//    cout << testAccount.getName() << endl;
-//    cout << testAccount.getUFID() << endl;
-//    cout << testAccount.getDOB() << endl;
-//    System system (true);
-////    hashwrapper *md5 = new md5wrapper();
-////    string user;
-////    cin >> user;
-////    string pass;
-////    cin >> pass;
-////    system.createUser(user, md5->getHashFromString(pass));
-//    system.login("Harry", "Pass");
-//    return 0;
-//}
-
-TEST_CASE( "Valid login is attempted", "[login]" ) {
-    System system (true);
-    hashwrapper *md5 = new md5wrapper();
+TEST_CASE( "System Tester", "[system]" ) {
     
-    REQUIRE( system.login("Admin", "Passw0rd!") == true );
+    System system (true);
+    
+    SECTION("Valid login attempt") {
+        hashwrapper *md5 = new md5wrapper();
+        
+        REQUIRE( system.login("Admin", "Passw0rd!") == true );
+    }
+    
+    SECTION("Invalid login attempt") {
+        hashwrapper *md5 = new md5wrapper();
+        
+        REQUIRE( system.login("Admin", "incorrectpassword") == false );
+    }
+    
+    SECTION("Create User") {
+        hashwrapper *md5 = new md5wrapper();
+        
+        REQUIRE( system.login("Admin", "incorrectpassword") == false );
+    }
+    
+    SECTION("Remove User [user exists]") {
+        system.createUser("TEMP_USER", "TEMP_PASSWORD");
+        
+        REQUIRE( system.removeUser("TEMP_USER") == true );
+    }
+    
+    SECTION("Remove User [user does not exist]") {
+        REQUIRE( system.removeUser("TEMP_USER") == false );
+    }
 }
 
-TEST_CASE( "Invalid login is attempted", "[login]" ) {
-    System system (true);
-    hashwrapper *md5 = new md5wrapper();
+TEST_CASE( "AccountTester", "[account]" ) {
+    string testName = "Bob";
+    int testID = 98765432;
+    string testDOB = "01/01/1990";
     
-    REQUIRE( system.login("Admin", "incorrectpassword") == false );
+    Account testAccount (testName);
+    testAccount.setUFID(testID);
+    testAccount.setDOB(testDOB);
+    
+    REQUIRE( testAccount.getName() == testName);
+    REQUIRE( testAccount.getUFID() == testID);
+    REQUIRE( testAccount.getDOB() == testDOB);
 }
 
+//EXAMPLE
 //TEST_CASE( "Factorials are computed", "[factorial]" ) {
 //    REQUIRE( Factorial(1) == 1 );
 //    REQUIRE( Factorial(2) == 2 );
