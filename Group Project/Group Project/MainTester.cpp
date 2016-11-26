@@ -29,11 +29,13 @@ TEST_CASE( "System Tester", "[system]" ) {
     }
     
     SECTION("Valid login attempt") {
+        REQUIRE( system.userExists("Admin") == true );
         
         REQUIRE( system.login("Admin", "Passw0rd!") == true );
     }
     
     SECTION("Invalid login attempt") {
+        REQUIRE( system.userExists("Admin") == true );
         
         REQUIRE( system.login("Admin", "incorrectpassword") == false );
     }
@@ -71,10 +73,13 @@ TEST_CASE( "AccountTester", "[account]" ) {
     Account testAccount (testName);
     testAccount.setUFID(testID);
     testAccount.setDOB(mm,dd,yyyy);
+    testAccount.setLocation(0, 0);
     
-    REQUIRE( testAccount.getName() == testName);
-    REQUIRE( testAccount.getUFID() == testID);
-    REQUIRE( testAccount.getDOB() == testDOB);
+    REQUIRE( testAccount.getName() == testName );
+    REQUIRE( testAccount.getUFID() == testID );
+    REQUIRE( testAccount.getDOB() == testDOB );
+    REQUIRE( testAccount.distanceTo((int[]){0,0}) == 0 );
+    REQUIRE( testAccount.distanceTo((int[]){3,4}) == 5 );
 }
 
 //EXAMPLE

@@ -13,15 +13,25 @@
 
 using namespace std;
 
+const bool SELLER = true;
+const bool BUYER = false;
+
 class Account {
 private:
     string name;
+    string gender;
+    string description;
     int month;
     int day;
     int year;
-    string gender;
     int ufid;
+    int location[2];
+    bool isseller;
+    double exchangeRate;
+    double maxDistance;
+    double price;
 public:
+    Account(string, int, int, int, int, int[2], bool, double, double, double);
     Account(string);
     string getName();
     void setName(string);
@@ -29,6 +39,19 @@ public:
     void setDOB(int, int, int);
     int getUFID();
     void setUFID(int);
+    int* getLocation();
+    void setLocation(int, int);
+    bool getTradeStatus();
+    void setTradeStatus(bool);
+    double getExchangeRate();
+    void setExchangeRate(double);
+    double getMaxDistance();
+    void setMaxDistance(double);
+    double getPrice();
+    void setPrice(double);
+    double distanceTo(int[2]);
+    
+    
 };
 
 #endif /* Account_hpp */
