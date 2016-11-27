@@ -29,40 +29,37 @@
 //----------------------------------------------------------------------	
 
 /**
- *  @file 	hl_md5wrapper.cpp
- *  @brief	This file contains the implementation of the 
- *  		md5wrapper class
- *  @date 	Mo 17 Sep 2007
+ *  @file 	hl_sha256wrapper.cpp
+ *  @brief	This file contains the implementation of the sha256wrapper 
+ *  		class.
+ *  @date 	Di 25 Sep 2007
  */  
 
-//---------------------------------------------------------------------- 
+//----------------------------------------------------------------------	
+//hashlib++ includes
+#include "hl_sha256wrapper.h"
+#include "hl_sha256.h"
+
+
+//----------------------------------------------------------------------	
 //STL includes
 #include <string>
-#include <fstream>
-#include <iostream>
-#include <sstream>
 
-//---------------------------------------------------------------------- 
-//hashlib++ includes
-#include "hl_md5wrapper.h"
-
-//---------------------------------------------------------------------- 
-//private member functions
+//----------------------------------------------------------------------	
+//private memberfunctions
 
 /**
  *  @brief 	This method ends the hash process
  *  		and returns the hash as string.
  *
- *  @return 	the hash as std::string
+ *  @return 	a hash as std::string
  */  
-std::string md5wrapper::hashIt(void)
+std::string sha256wrapper::hashIt(void)
 {
-	//create the hash
-	unsigned char buff[16] = "";	
-	md5->MD5Final((unsigned char*)buff,&ctx);
+	sha2_byte buff[SHA256_DIGEST_STRING_LENGTH];
+	sha256->SHA256_End(&context,(char*)buff);
 
-	//converte the hash to a string and return it
-	return convToString(buff);	
+	return convToString(buff);
 }
 
 /**
@@ -73,88 +70,66 @@ std::string md5wrapper::hashIt(void)
  *  @param 	data The hash-data to covert into HEX
  *  @return	the converted data as std::string
  */  
-std::string md5wrapper::convToString(unsigned char *data)
+std::string sha256wrapper::convToString(unsigned char *data)
 {
 	/*
-	 * using a ostringstream to convert the hash in a
-	 * hex string
+	 * we can just copy data to a string, because 
+	 * the transforming to hash is already done
+	 * within the sha256 implementation
 	 */
-	std::ostringstream os;
-	for(int i=0; i<16; ++i)
-	{
-		/*
-		 * set the width to 2
-		 */
-		os.width(2);
-
-		/*
-		 * fill with 0
-		 */
-		os.fill('0');
-
-		/*
-		 * conv to hex
-		 */
-		os << std::hex << static_cast<unsigned int>(data[i]);
-	}
-
-	/*
-	 * return as std::string
-	 */
-	return os.str();
+	return std::string((const char*)data);
 }
 
 /**
  *  @brief 	This method adds the given data to the 
- *  		current hash context.
+ *  		current hash context
  *
  *  @param 	data The data to add to the current context
  *  @param 	len The length of the data to add
  */  
-void md5wrapper::updateContext(unsigned char *data, unsigned int len)
+void sha256wrapper::updateContext(unsigned char *data, unsigned int len)
 {
-	//update 
-	md5->MD5Update(&ctx, data, len);
+	this->sha256->SHA256_Update(&context,data,len);
 }
 
 /**
  *  @brief 	This method resets the current hash context.
  *  		In other words: It starts a new hash process.
  */  
-void md5wrapper::resetContext(void)
+void sha256wrapper::resetContext(void)
 {
-	//init md5
-	md5->MD5Init(&ctx);
+	sha256->SHA256_Init(&context);
 }
+
 
 /**
  * @brief 	This method should return the hash of the
  * 		test-string "The quick brown fox jumps over the lazy
  * 		dog"
  */
-std::string md5wrapper::getTestHash(void)
+std::string sha256wrapper::getTestHash(void)
 {
-	return "9e107d9d372bb6826bd81d3542a419d6";
+	return "d7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592";
 }
 
-//---------------------------------------------------------------------- 
-//public member functions
+//----------------------------------------------------------------------	
+//public memberfunctions
 
 /**
  *  @brief 	default constructor
  */  
-md5wrapper::md5wrapper()
+sha256wrapper::sha256wrapper()
 {
-	md5 = new MD5();
+	this->sha256 = new SHA256();	
 }
 
 /**
  *  @brief 	default destructor
  */  
-md5wrapper::~md5wrapper()
+sha256wrapper::~sha256wrapper()
 {
-	delete md5;
+	delete sha256;
 }
 
-//---------------------------------------------------------------------- 
+//----------------------------------------------------------------------	
 //EOF
