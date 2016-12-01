@@ -8,17 +8,17 @@
 
 #include <iostream>
 #include <stdio.h>
-#include "Account.hpp"
-#include "System.hpp"
-#include "sha/hl_sha256wrapper.h"
+#include "../Account.hpp"
+#include "../Flexbucks.hpp"
+#include "../sha/hl_sha256wrapper.h"
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
-#include "catch.hpp"
+#include "../catch.hpp"
 
 using namespace std;
 
 TEST_CASE( "System Tester", "[system]" ) {
 
-    System system (true);
+    Flexbucks system (true);
 
     SECTION("User exists") {
         REQUIRE( system.userExists("Admin") == true );
@@ -46,7 +46,7 @@ TEST_CASE( "System Tester", "[system]" ) {
         REQUIRE( system.createUser("Admin", "Passw0rd!") == false );
     }
 
-    SECTION("Remove User [user exists]") {
+    SECTION("Create User/Remove User [user exists]") {
         hashwrapper *sha = new sha256wrapper();
         system.createUser("TEMP_USER", sha->getHashFromString("TEMP_PASSWORD"));
 
@@ -73,13 +73,10 @@ TEST_CASE( "AccountTester", "[account]" ) {
     Account testAccount (testName);
     testAccount.setUFID(testID);
     testAccount.setDOB(mm,dd,yyyy);
-    testAccount.setLocation(0, 0);
 
     REQUIRE( testAccount.getName() == testName );
     REQUIRE( testAccount.getUFID() == testID );
     REQUIRE( testAccount.getDOB() == testDOB );
-    REQUIRE( testAccount.distanceTo((int[]){0,0}) == 0 );
-    REQUIRE( testAccount.distanceTo((int[]){3,4}) == 5 );
 }
 
 //EXAMPLE

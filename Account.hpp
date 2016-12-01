@@ -10,48 +10,44 @@
 
 #include <stdio.h>
 #include <string>
-
-using namespace std;
-
-const bool SELLER = true;
-const bool BUYER = false;
+#include <fstream>
+#include <iostream>
 
 class Account {
 private:
-    string name;
-    string gender;
-    string description;
+    std::string name;
     int month;
     int day;
     int year;
     int ufid;
-    int location[2];
-    bool isseller;
-    double exchangeRate;
-    double maxDistance;
-    double price;
 public:
-    Account(string, int, int, int, int, int[2], bool, double, double, double);
-    Account(string);
-    string getName();
-    void setName(string);
-    string getDOB();
+    Account(std::string);
+    Account();
+    std::string getName();
+    void setName(std::string);
+    std::string getDOB();
     void setDOB(int, int, int);
     int getUFID();
     void setUFID(int);
-    int* getLocation();
-    void setLocation(int, int);
-    bool getTradeStatus();
-    void setTradeStatus(bool);
-    double getExchangeRate();
-    void setExchangeRate(double);
-    double getMaxDistance();
-    void setMaxDistance(double);
-    double getPrice();
-    void setPrice(double);
-    double distanceTo(int[2]);
-    
-    
+    // Insertion operator
+  	friend std::ostream& operator<<(std::ostream& os, const Account& acc)
+  	{
+  		// write out individual members of s with an end of line between each one
+  		os << acc.name << '\n';
+  		os << acc.month << '\n';
+  		os << acc.day << '\n';
+  		os << acc.year << '\n';
+  		os << acc.ufid << '\n';
+  		return os;
+  	}
+
+  	// Extraction operator
+  	friend std::istream& operator>>(std::istream& is, Account& acc)
+  	{
+  		// read in individual members of s
+  		is >> acc.name >> acc.month >> acc.day >> acc.year >> acc.ufid;
+  		return is;
+  	}
 };
 
 #endif /* Account_hpp */

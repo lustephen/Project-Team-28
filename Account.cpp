@@ -6,25 +6,17 @@
 //  Copyright © 2016 Alejandro Munoz-McDonald. All rights reserved.
 //
 
+#include <string>
 #include <cmath>
 #include "Account.hpp"
 
-Account::Account(string name, int ufid, int mm, int dd, int yyyy, int loc[2], bool tradeStatus, double exchangeRate, double maxDist, double price) {
-    this -> name = name;
-    this -> ufid = ufid;
-    this -> month = mm;
-    this -> day = dd;
-    this -> year = yyyy;
-    this -> location[0] = loc[0];
-    this -> location[1] = loc[1];
-    this -> isseller = tradeStatus;
-    this -> exchangeRate = exchangeRate;
-    this -> maxDistance = maxDist;
-    this -> price = price;
-}
+using namespace std;
 
 Account::Account(string name) {
     this -> name = name;
+}
+
+Account::Account() {
 }
 
 string Account::getName() {
@@ -51,49 +43,4 @@ void Account::setDOB(int mm, int dd, int yyyy) {
 
 void Account::setUFID(int ufid) {
     this -> ufid = ufid;
-}
-
-int* Account::getLocation() {
-    return this -> location;
-}
-
-void Account::setLocation(int lat, int lon) {
-    this -> location[0] = lat;
-    this -> location[1] = lon;
-}
-
-bool Account::getTradeStatus() {
-    return this -> isseller;
-}
-
-void Account::setTradeStatus(bool status) {
-    this -> isseller = status;
-}
-
-double Account::getExchangeRate() {
-    return this -> exchangeRate;
-}
-
-void Account::setExchangeRate(double rate) {
-    this -> exchangeRate = rate;
-}
-
-double Account::getMaxDistance() {
-    return this -> maxDistance;
-}
-
-void Account::setMaxDistance(double maxDist) {
-    this -> maxDistance = maxDist;
-}
-
-double Account::getPrice() {
-    return this -> price;
-}
-
-void Account::setPrice(double price) {
-    this -> price = price;
-}
-
-double Account::distanceTo(int dest[2]) {
-    return sqrt(pow(dest[0] - this -> location[0], 2) + pow(dest[1] - this -> location[1], 2));
 }
