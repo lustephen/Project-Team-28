@@ -2,9 +2,9 @@
 #include<vector>
 #include<queue>
 #include<cmath>
-#include<Seller>
-#include<Buyer>
-#include<BuyerSellerTree>
+#include"Seller.hpp"
+#include"Buyer.hpp"
+#include"BuyerSellerTree.hpp"
 
 Seller::Seller(int l[], double min, double max, double ex)
 {
