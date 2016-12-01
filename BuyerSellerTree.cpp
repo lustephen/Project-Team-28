@@ -1,7 +1,7 @@
 #include<vector>
-#include<Seller>
-#include<Buyer>
-#include<BuyerSellerTree>
+#include"Seller.hpp"
+#include"Buyer.hpp"
+#include"BuyerSellerTree.hpp"
 
 tree::tree()
 {
