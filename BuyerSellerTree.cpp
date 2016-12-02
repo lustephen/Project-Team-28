@@ -7,9 +7,10 @@ tree::tree()
 {
 	root = 0;
 }
+
 //Buyer
 
-tree::node* tree::makeLeaf(int data,Buyer *b)
+tree::node* tree::makeLeaf(double data, Buyer *b)
 {
 	node* n = new node();
 	n->whichBuyer = b;
@@ -19,12 +20,12 @@ tree::node* tree::makeLeaf(int data,Buyer *b)
 	return n;
 }
 
-void tree::addLeaf(int data,Buyer *b)
+void tree::addLeaf(double data, Buyer *b)
 {
-	addLeaf(data, root,b);
+	addLeaf(data, root, b);
 }
 
-void tree::addLeaf(int data, node* p,Buyer *b)
+void tree::addLeaf(double data, node* p, Buyer *b)
 {
 	if (root == 0)
 	{
@@ -40,27 +41,27 @@ void tree::addLeaf(int data, node* p,Buyer *b)
 	{
 		if (p->left != 0)
 		{
-			addLeaf(data, p->left,b);
+			addLeaf(data, p->left, b);
 		}
 		else
-			p->left = makeLeaf(data,b);
+			p->left = makeLeaf(data, b);
 	}
 
 	else if (data > p->data)
 	{
 		if (p->right != 0)
 		{
-			addLeaf(data, p->right,b);
+			addLeaf(data, p->right, b);
 		}
 		else
-			p->right = makeLeaf(data,b);
+			p->right = makeLeaf(data, b);
 	}
 }
 
 
 //Seller
 
-tree::node* tree::makeLeaf(int data, Seller *s)
+tree::node* tree::makeLeaf(double data, Seller *s)
 {
 	node* n = new node();
 	n->whichSeller = s;
@@ -70,18 +71,18 @@ tree::node* tree::makeLeaf(int data, Seller *s)
 	return n;
 }
 
-void tree::addLeaf(int data, Seller* s)
+void tree::addLeaf(double data, Seller* s)
 {
 	addLeaf(data, root, s);
 }
 
-void tree::addLeaf(int data, node* p, Seller* s)
+void tree::addLeaf(double data, node* p, Seller* s)
 {
 	if (root == 0)
 	{
 		root = makeLeaf(data, s);
 	}
-	
+
 	else if (data <= p->data)
 	{
 		if (p->left != 0)
@@ -104,7 +105,7 @@ void tree::addLeaf(int data, node* p, Seller* s)
 }
 
 void tree::inOrderSellerList(node* n)
-{	
+{
 	if (n == 0)
 		return;
 	inOrderSellerList(n->left);
@@ -133,15 +134,4 @@ std::vector<Seller*> tree::getSortedSellerList()
 std::vector<Buyer*> tree::getSortedBuyerList()
 {
 	return sortedBuyerList;
-}
-
-void Seller::sortBuyerList()
-{
-	tree oak;
-
-	for (int i = 0; i < buyerList.size; i++)
-		oak.addLeaf(buyerList[i]->getMaxDist, buyerList[i]);
-
-	for (int i = 0; i < oak.getSortedBuyerList.size; i++)
-		sortedBuyerList.push(oak.getSortedBuyerList[i]);
 }
