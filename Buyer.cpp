@@ -32,3 +32,17 @@ double Buyer::getExcangeRate()
 	return exRate;
 }
 
+int Buyer::getLocationCoordinateSize()
+{
+	return locationCoordinateSize;
+}
+
+void Buyer::setDistanceToSeller(double dist)
+{
+	distanceToSeller = dist;
+}
+
+double Buyer::getDistanceToSeller()
+{
+	return distanceToSeller;
+}
