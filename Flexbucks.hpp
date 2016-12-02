@@ -12,6 +12,7 @@
 #include "Account.hpp"
 #include <stdio.h>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -20,10 +21,16 @@ public:
     Flexbucks(bool);
     bool login(string,string);
     bool createUser(string,string);
+    bool createUser(string,string,Account);
     bool removeUser(string);
     bool userExists(string);
+    string printMap();
+    void setMap(vector< vector<Account> >);
+    bool addToMap(Account,int,int);
+    Account getLoggedInUser();
 private:
     Account loggedInAcc;
+    vector< vector<Account> > map;
     bool loggedIn;
     bool debugMode;
 };

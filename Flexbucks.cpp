@@ -5,7 +5,6 @@
 //  Created by Alejandro Munoz-McDonald on 11/24/16.
 //  Copyright © 2016 Alejandro Munoz-McDonald. All rights reserved.
 //
-
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -21,7 +20,6 @@ Flexbucks::Flexbucks(bool debugMode) {
 
 bool Flexbucks::login(string user, string hPassword) {
     vector<string> lines;
-    vector<string> temp;
 
     ifstream ifs("accounts/" +user + ".fba");
 
@@ -34,8 +32,10 @@ bool Flexbucks::login(string user, string hPassword) {
     }
 
     functions::split(functions::readFile("users.txt"), '\n', lines);
-    for(vector<string>::iterator i = lines.begin(); i != lines.end(); ++i) {
-        functions::split(*i,':',temp);
+    
+    for(string i: lines) {
+        vector<string> temp;
+        functions::split(i,':',temp);
         if(temp.at(0) == user && temp.at(1) == hPassword) {
             return true;
         }
@@ -69,15 +69,12 @@ bool Flexbucks::userExists(string user) {
 
 }
 
-bool Flexbucks::createUser(string user, string hPassword) {
+bool Flexbucks::createUser(string user, string hPassword, Account acc = Account()) {
     if(userExists(user)) {
         return false;
     }
 
-    Account acc (user);
-    acc.setUFID(12345678);
-    acc.setDOB(1,2,1234);
-
+    this -> loggedInAcc = acc;
 
 	  ofstream ofs("accounts/" + user + ".fba");
 
@@ -97,6 +94,12 @@ bool Flexbucks::createUser(string user, string hPassword) {
     myfile.close();
 
     return true;
+}
+
+bool Flexbucks::createUser(string user, string hPassword) {
+  Account acc (user);
+
+  createUser(user,hPassword,acc);
 }
 
 bool Flexbucks::removeUser(string user) {
@@ -131,4 +134,31 @@ bool Flexbucks::removeUser(string user) {
     myfile.close();
 
     return found_user;
+}
+
+Account Flexbucks::getLoggedInUser() {
+  return this -> loggedInAcc;
+}
+
+string Flexbucks::printMap() {
+  string res = "";
+  for(int i=0; i < this -> map.size(); i++) {
+    for(int j=0; j < this -> map[i].size(); j++) {
+      res += (map[i][j].getName() + "\t");
+    }
+    res += "\n";
+  }
+  return res;
+}
+
+void Flexbucks::setMap(vector< vector<Account> > map) {
+  this -> map = map;
+}
+
+bool Flexbucks::addToMap(Account user, int x, int y) {
+  if(x > 0 && x < map.size() && y > 0 && y < map[x].size()) {
+    this -> map[x][y] = user;
+    return true;
+  }
+  return false;
 }

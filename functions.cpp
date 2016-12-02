@@ -22,7 +22,7 @@ void functions::split(const string &s, char delim, vector<string> &elems) {
 
 string functions::readFile(string filename) {
     ifstream myfile;
-    myfile.open ("users.txt", ios::in);
+    myfile.open (filename, ios::in);
     string file_str;
     string line;
     if (myfile.is_open()) {
@@ -33,8 +33,8 @@ string functions::readFile(string filename) {
     else {
         return NULL;
     }
-    
+
     myfile.close();
-    
+
     return file_str;
 }

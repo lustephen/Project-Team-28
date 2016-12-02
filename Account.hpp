@@ -19,16 +19,20 @@ private:
     int month;
     int day;
     int year;
-    int ufid;
+    std::string ufid;
 public:
+    Account(std::string,std::string,std::string);
     Account(std::string);
     Account();
     std::string getName();
     void setName(std::string);
     std::string getDOB();
     void setDOB(int, int, int);
-    int getUFID();
-    void setUFID(int);
+    bool setDOB(std::string);
+    std::string getUFID();
+    void setUFID(std::string);
+    std::string print();
+    std::string titlePrint();
     // Insertion operator
   	friend std::ostream& operator<<(std::ostream& os, const Account& acc)
   	{
