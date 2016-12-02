@@ -182,6 +182,9 @@ int main(int argc, const char * argv[]) {
     if(functions::is_number(tmp_inp.c_str())) {
       inp = atoi(tmp_inp.c_str());
     }
+    else {
+      inp = 0;
+    }
 
     string sbinp;
 
