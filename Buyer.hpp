@@ -1,4 +1,4 @@
-class Buyer: public Person
+class Buyer//: public Person
 {
 	const int locationCoordinateSize = 2;
 	int location[2];
@@ -15,4 +15,7 @@ public:
 	double getEstPurchase();
 	double getExcangeRate();
 	int* getLocation();
+	int getLocationCoordinateSize();
+	void setDistanceToSeller(double dist);
+	double getDistanceToSeller();
 };
