@@ -46,3 +46,4 @@ double Buyer::getDistanceToSeller()
 {
 	return distanceToSeller;
 }
+
