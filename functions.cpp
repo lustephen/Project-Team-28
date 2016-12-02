@@ -20,6 +20,13 @@ void functions::split(const string &s, char delim, vector<string> &elems) {
     }
 }
 
+bool functions::is_number(const std::string& s)
+{
+    std::string::const_iterator it = s.begin();
+    while (it != s.end() && std::isdigit(*it)) ++it;
+    return !s.empty() && it == s.end();
+}
+
 string functions::readFile(string filename) {
     ifstream myfile;
     myfile.open (filename, ios::in);

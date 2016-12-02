@@ -21,4 +21,5 @@ class functions {
 public:
     static string readFile(string);
     static void split(const string &,char,vector<string> &);
+    static bool is_number(const string &);
 };

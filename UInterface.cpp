@@ -64,15 +64,21 @@ bool createUser() {
 
   //Account creation
   int slashes = 0;
+  bool isNumbers = false;
   string dob = "";
   string ufid;
   cout << endl << "Account Creation" << endl << endl;
-  while(slashes != 3) {
+  while(slashes != 3 || !isNumbers) {
     cout << "Please enter your date of birth (mm/dd/yyyy): ";
     cin >> dob;
     vector<string> dob_checker;
     functions::split(dob,'/',dob_checker);
-    if((slashes = dob_checker.size()) != 3) {
+    if((slashes = dob_checker.size()) == 3) {
+      isNumbers = functions::is_number(dob_checker.at(0).c_str());
+      isNumbers &= functions::is_number(dob_checker.at(1).c_str());
+      isNumbers &= functions::is_number(dob_checker.at(2).c_str());
+    }
+    if(slashes != 3 || !isNumbers) {
       cout << "Invalid date format. Try again." << endl;
     }
   }
@@ -148,7 +154,7 @@ int main(int argc, const char * argv[]) {
   for(int i = 0; i < 10; i++) { //Generate map
     vector<Account> row; // Create an empty row
     for (int j = 0; j < 9; j++) {
-      Account tmp ("tmp");
+      Account tmp ("---");
       row.push_back(tmp); // Add an element (column) to the row
     }
     tempmap.push_back(row);
@@ -171,9 +177,12 @@ int main(int argc, const char * argv[]) {
 
     cout << error;
     cout << "> ";
-    cin >> inp;
+    string tmp_inp;
+    cin >> tmp_inp;
+    if(functions::is_number(tmp_inp.c_str())) {
+      inp = atoi(tmp_inp.c_str());
+    }
 
-    Account a("Bob");
     string sbinp;
 
     switch(inp) {
