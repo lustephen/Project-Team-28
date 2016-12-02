@@ -11,6 +11,11 @@ Seller::Seller(int l[], double min, double max, double ex)
 	exRate = ex;
 }
 
+void Seller::setDistanceToBuyer(double dist)
+{
+	distanceToBuyer = dist;
+}
+
 double Seller::getMaxDist()
 {
 	return maxDist;
@@ -24,5 +29,21 @@ double Seller::getMinPurchase()
 double Seller::getExcangeRate()
 {
 	return exRate;
+}
+
+int Seller::getLocationCoordinateSize()
+{
+	return locationCoordinateSize;
+}
+
+
+int* Seller::getLocation()
+{
+	return location;
+}
+
+double Seller::getDistanceToBuyer()
+{
+	return distanceToBuyer;
 }
 
