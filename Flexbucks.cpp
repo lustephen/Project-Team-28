@@ -170,6 +170,36 @@ void Flexbucks::setMap(vector< vector<Account> > map) {
   this -> map = map;
 }
 
+bool Flexbucks::loadMap(string filename, char sep) {
+  fstream myfile;
+  string line;
+  vector< vector<Account> > temp;
+
+  myfile.open (filename, ios::in);
+  if (myfile.is_open()) {
+      while ( getline(myfile, line) ) {
+        if(line != "" && line[0] != '#') {
+          vector<Account> row;
+          vector<string> sp;
+          functions::split(line,sep,sp);
+          for(int i=0; i<sp.size();i++) {
+            Account tmpAcc (sp.at(i));
+            row.push_back(tmpAcc);
+          }
+          temp.push_back(row);
+        }
+      }
+      setMap(temp);
+
+      return true;
+  }
+  return false;
+}
+
+bool Flexbucks::loadMap(string filename) {
+  return loadMap(filename,' ');
+}
+
 bool Flexbucks::addToMap(Account user, int x, int y) {
   if(x > 0 && x < map.size() && y > 0 && y < map[x].size()) {
     this -> map[x][y] = user;

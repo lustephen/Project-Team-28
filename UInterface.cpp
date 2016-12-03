@@ -151,22 +151,7 @@ int main(int argc, const char * argv[]) {
 
   clear();
 
-  // sys.setMap();
-  string mapText = "bbbbbbbbbbbbbbbbbbbbxxxbbbbbbbbbbbbbbbbbbbbxxxxbbbbxxxxxbxxxxbbbxxxxxxbxxxbbbxxxxxxxbxxxbbbxxxxxxxbxxbbbbxxxxxxxbbbbbbbxxxxxxxbbbbbbxxxxxxxxxxxbbbxxxxxxxxxxxbbbxxxxxxxxxxxbbbxxxxxxxxxbbbbbxxxxxxxx";
-
-  vector< vector<Account> > tempmap;
-
-  for(int i = 0; i < 14; i++) { //Generate map
-    vector<Account> row; // Create an empty row
-    for (int j = 0; j < 14; j++) {
-      string tmpString(1,mapText[i*14+j]);
-      Account tmp (tmpString);
-      row.push_back(tmp); // Add an element (column) to the row
-    }
-    tempmap.push_back(row);
-  }
-
-  sys.setMap(tempmap);
+  sys.loadMap("res/Map", ',');
 
   string error = "";
   int inp = 0;

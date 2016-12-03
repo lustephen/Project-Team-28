@@ -26,6 +26,8 @@ public:
     bool userExists(string);
     string printMap();
     void setMap(vector< vector<Account> >);
+    bool loadMap(string filename,char sep);
+    bool loadMap(string filename);
     bool addToMap(Account,int,int);
     Account& getLoggedInUser();
     bool save();

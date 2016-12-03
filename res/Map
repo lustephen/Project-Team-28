@@ -1,0 +1,24 @@
+b,b,b,b,b,b,b,b,b,b,b,b,b,b
+b,b,b,b,b,b,x,x,x,b,b,b,b,b
+b,b,b,b,b,b,b,b,b,b,b,b,b,b
+b,x,x,x,x,b,b,b,b,x,x,x,x,x
+b,x,x,x,x,b,b,b,x,x,x,x,x,x
+b,x,x,x,b,b,b,x,x,x,x,x,x,x
+b,x,x,x,b,b,b,x,x,x,x,x,x,x
+b,x,x,b,b,b,b,x,x,x,x,x,x,x
+b,b,b,b,b,b,b,x,x,x,x,x,x,x
+b,b,b,b,b,b,x,x,x,x,x,x,x,x
+x,x,x,b,b,b,x,x,x,x,x,x,x,x
+x,x,x,b,b,b,x,x,x,x,x,x,x,x
+x,x,x,b,b,b,x,x,x,x,x,x,x,x
+x,b,b,b,b,b,x,x,x,x,x,x,x,x
+
+#   ^
+#   |
+#   N
+
+
+# b-blank
+# x-cannot be occupied
+
+# Use # to denote a line with a comment. Empty lines and comments are ignored
