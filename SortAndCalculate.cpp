@@ -15,7 +15,6 @@ void SortAndCalculate::buyerFlow()
 	//calculates the distance each seller must go to reach the buyer
 	//calculateDistanceToBuyer();
 	//removes all the sellers who do not match the buyer
-	removeOutOfRangeValuesForSellerList();
 	//Sorts the seller list and stores the sorted sellerlist into sorted sellerlist
 	//I will need a parameter to know if I should sort with respect to distance or price
 	sortSellerList();
@@ -27,9 +26,24 @@ void SortAndCalculate::buyerFlow()
 void SortAndCalculate::sellerFlow()
 {
 	//calculateDistanceToSeller();
-	removeOutOfRangeValuesForBuyerList();
 	sortBuyerList();
 	getSelectedBuyer();
+}
+
+bool SortAndCalculate::avaliableBuyerCheck()
+{
+	removeOutOfRangeValuesForBuyerList();
+	if (sellerList.size() == 0)
+		return false;
+	return true;
+}
+
+bool SortAndCalculate::avaliableSellerCheck()
+{
+	removeOutOfRangeValuesForSellerList();
+	if (sellerList.size() == 0)
+		return false;
+	return true;
 }
 /*
 void SortAndCalculate::calculateDistanceToBuyer()
