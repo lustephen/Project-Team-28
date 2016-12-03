@@ -13,8 +13,8 @@ class SortAndCalculate
 	void sortBuyerList();
 	void removeOutOfRangeValues(Buyer *b, vector<Seller*> s);
 	void removeOutOfRangeValues(Seller *s, vector<Buyer*> b);
-	void calculateDistanceToBuyer();
-	void calculateDistanceToSeller();
+	//void calculateDistanceToBuyer();
+	//void calculateDistanceToSeller();
 
 public:
 	SortAndCalculate(Buyer *b, vector<Seller*> s);
