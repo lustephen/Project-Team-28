@@ -14,6 +14,8 @@
 
 using namespace std;
 
+string USERS_FILE = "res/users.txt";
+
 Flexbucks::Flexbucks(bool debugMode) {
     this -> debugMode = debugMode;
 }
@@ -31,7 +33,7 @@ bool Flexbucks::login(string user, string hPassword) {
         this -> loggedInAcc = acc;
     }
 
-    functions::split(functions::readFile("users.txt"), '\n', lines);
+    functions::split(functions::readFile(USERS_FILE), '\n', lines);
 
     for(string i: lines) {
         vector<string> temp;
@@ -49,7 +51,7 @@ bool Flexbucks::userExists(string user) {
     string file_str;
     string line;
     bool found_user = false;
-    myfile.open ("users.txt", ios::in);
+    myfile.open (USERS_FILE, ios::in);
     if (myfile.is_open()) {
         while ( getline(myfile, line) ) {
             vector<string> temp;
@@ -98,7 +100,7 @@ bool Flexbucks::createUser(string user, string hPassword, Account acc = Account(
     ofs.close();
 
     fstream myfile;
-    myfile.open ("users.txt", ios::out | ios::app);
+    myfile.open (USERS_FILE, ios::out | ios::app);
     if (myfile.is_open()) {
         myfile << user << ":" << hPassword << '\n';
     }
@@ -125,7 +127,7 @@ bool Flexbucks::removeUser(string user) {
 
     remove(("accounts/" + user + ".fba").c_str());
 
-    myfile.open ("users.txt", ios::in);
+    myfile.open (USERS_FILE, ios::in);
     if (myfile.is_open()) {
         while ( getline(myfile, line) ) {
             vector<string> temp;
@@ -144,7 +146,7 @@ bool Flexbucks::removeUser(string user) {
 
     myfile.close();
 
-    myfile.open ("users.txt", ios::out);
+    myfile.open (USERS_FILE, ios::out);
     myfile << file_str;
     myfile.close();
 
