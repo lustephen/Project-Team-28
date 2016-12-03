@@ -19,6 +19,8 @@ class SortAndCalculate
 public:
 	SortAndCalculate(Buyer *b, vector<Seller*> s);
 	SortAndCalculate(Seller *s, vector<Buyer*> b);
+	bool avaliableSellerCheck();
+	bool avaliableBuyerCheck();
 	Buyer* getSelectedBuyer();
 	Seller* getSelectedSeller();
 
