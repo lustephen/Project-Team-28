@@ -32,7 +32,7 @@ bool Flexbucks::login(string user, string hPassword) {
     }
 
     functions::split(functions::readFile("users.txt"), '\n', lines);
-    
+
     for(string i: lines) {
         vector<string> temp;
         functions::split(i,':',temp);
@@ -144,7 +144,7 @@ string Flexbucks::printMap() {
   string res = "";
   for(int i=0; i < this -> map.size(); i++) {
     for(int j=0; j < this -> map[i].size(); j++) {
-      res += (map[i][j].getName() + "\t");
+      res += (map[i][j].getName() + "    ");
     }
     res += "\n";
   }

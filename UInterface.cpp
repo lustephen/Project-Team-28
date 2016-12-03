@@ -153,10 +153,10 @@ int main(int argc, const char * argv[]) {
 
   vector< vector<Account> > tempmap;
 
-  for(int i = 0; i < 10; i++) { //Generate map
+  for(int i = 0; i < 14; i++) { //Generate map
     vector<Account> row; // Create an empty row
-    for (int j = 0; j < 9; j++) {
-      string tmpString{mapText[i*14+j]};
+    for (int j = 0; j < 14; j++) {
+      string tmpString(1,mapText[i*14+j]);
       Account tmp (tmpString);
       row.push_back(tmp); // Add an element (column) to the row
     }
