@@ -1,3 +1,5 @@
+#include "Person.hpp"
+
 class Seller: public Person
 {
 	//const int locationCoordinateSize = 2;
@@ -6,7 +8,7 @@ class Seller: public Person
 	//double maxDist;
 	double exRate;
 	//double distanceToBuyer;
-	
+
 
 public:
 	Seller(double minPurchase, double exRate);
@@ -20,3 +22,12 @@ public:
 	//double getDistanceToBuyer();
 
 };
+
+void createSellerPop(std::vector<Seller*> vec) {
+	for (int h = 0; h < 20; h++) {
+		int j = randMonth();
+		char z = randGender();
+		Seller *sell = new Seller(randMinPurchase(), randExRate(), j, randDay(j), randYear(), randName(z), z, randUfid());
+		vec.push_back(sell);
+	}
+}

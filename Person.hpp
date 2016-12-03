@@ -1,8 +1,11 @@
+
+#ifndef Person_hpp
+#define Person_hpp
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include <ctime>
-
 
 class Person
 {
@@ -12,26 +15,53 @@ private:
 	int day;
 	int year;
 	char gender;
-	int ufid;
+	std::string ufid;
 
 public:
-	Person(int mm, int dd, int yr, std::string n, char gender, int ufid);
-
+	Person(std::string, int, int, int, char, std::string);
+	Person(std::string, std::string, char, std::string);
+	Person(std::string);
+	Person();
 	std::string getName();
+	void setName(std::string);
 	char getGender();
-	int getID();
+	void setGender(char);
+	std::string getID();
+	void setID(std::string);
+	std::string getDOB();
 	int getDay();
 	int getMonth();
 	int getYear();
+	void setDOB(int,int,int);
+	bool setDOB(std::string);
+	friend std::ostream& operator<<(std::ostream& os, const Person& p)
+	{
+		// write out individual members of s with an end of line between each one
+		os << p.name << '\n';
+		os << p.month << '\n';
+		os << p.day << '\n';
+		os << p.year << '\n';
+		os << p.ufid << '\n';
+		os << p.gender << '\n';
+		return os;
+	}
+
+	// Extraction operator
+	friend std::istream& operator>>(std::istream& is, Person& p)
+	{
+		// read in individual members of s
+		is >> p.name >> p.month >> p.day >> p.year >> p.ufid >> p.gender;
+		return is;
+	}
 };
 
 
 //random methods just here to generate the random Pop later
-int randMonth() {
+static int randMonth() {
 	return (rand() % 12 + 1);
 }
 
-int randDay(int m) {
+static int randDay(int m) {
 	if (m == 2) {
 		return rand() % 28 + 1;
 	}
@@ -43,11 +73,11 @@ int randDay(int m) {
 	}
 }
 
-int randYear() {
+static int randYear() {
 	return rand() % 31 + 1968;					//1968 - 1998
 }
 
-char randGender() {
+static char randGender() {
 	int a = rand() % 2;
 	if (a == 0) {
 		return 'F';
@@ -57,7 +87,7 @@ char randGender() {
 	}
 }
 
-double randExRate() {
+static double randExRate() {
 	double rate = ((double)rand() / (double)RAND_MAX);
 
 	while (rate < .55) {
@@ -67,31 +97,14 @@ double randExRate() {
 	return rate;
 }
 
-double randEstPurchase() {
+static double randEstPurchase() {
 	double purchase = (double)(rand() % 18) + 3;
 	return purchase;
 }
 
-double randMinPurchase() {
+static double randMinPurchase() {
 	double purchase = (double)(rand() % 10) + 1;
 	return purchase;
 }
 
-void createBuyerPop(std::vector<Buyer*> vec) {
-	for (int g = 0; g < 20; g++) {
-		int a = randMonth();
-		char b = randGender();
-		Buyer *buy = new Buyer(randEstPurchase(), randExRate(), a, randDay(a), randYear(), randName(b), b, randUfid());
-		vec.push_back(buy);
-
-	}
-}
-
-void createSellerPop(std::vector<Seller*> vec) {
-	for (int h = 0; h < 20; h++) {
-		int j = randMonth();
-		char z = randGender();
-		Seller *sell = new Seller(randMinPurchase(), randExRate(), j, randDay(j), randYear(), randName(z), z, randUfid());
-		vec.push_back(sell);
-	}
-}
+#endif

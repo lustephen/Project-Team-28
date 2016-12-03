@@ -67,6 +67,7 @@ bool createUser() {
   bool isNumbers = false;
   string dob = "";
   string ufid;
+  char gender;
   cout << endl << "Account Creation" << endl << endl;
   while(slashes != 3 || !isNumbers) {
     cout << "Please enter your date of birth (mm/dd/yyyy): ";
@@ -84,8 +85,10 @@ bool createUser() {
   }
   cout << "Plese enter your UF ID: ";
   cin >> ufid;
+  cout << "Please enter you gender(m/f): ";
+  cin >> gender;
 
-  Account acc (user, dob, ufid);
+  Account acc (user, dob, gender, ufid);
 
   return sys.createUser(user,sha->getHashFromString(pass), acc);
 }

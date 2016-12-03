@@ -72,7 +72,7 @@ bool Flexbucks::userExists(string user) {
 bool Flexbucks::save() {
     Account acc = this -> loggedInAcc;
 
-	  ofstream ofs("accounts/" + acc.getName() + ".fba");
+	  ofstream ofs("accounts/" + acc.getPerson().getName() + ".fba");
 
     if(ofs << acc) {
       ofs.close();
@@ -114,7 +114,7 @@ bool Flexbucks::createUser(string user, string hPassword, Account acc = Account(
 bool Flexbucks::createUser(string user, string hPassword) {
   Account acc (user);
 
-  createUser(user,hPassword,acc);
+  return createUser(user,hPassword,acc);
 }
 
 bool Flexbucks::removeUser(string user) {
@@ -159,7 +159,7 @@ string Flexbucks::printMap() {
   string res = "";
   for(int i=0; i < this -> map.size(); i++) {
     for(int j=0; j < this -> map[i].size(); j++) {
-      res += (map[i][j].getName() + "    ");
+      res += (map[i][j].getPerson().getName() + "    ");
     }
     res += "\n";
   }
