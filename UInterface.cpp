@@ -149,12 +149,15 @@ int main(int argc, const char * argv[]) {
   clear();
 
   // sys.setMap();
+  string mapText = "Bbbbbbbbbbbbbbbbbbbbxxxbbbbbbbbbbbbbbbbbbbbxxxxbbbbxxxxxbxxxxbbbxxxxxxbxxxbbbxxxxxxxbxxxbbbxxxxxxxbxxbbbbxxxxxxxbbbbbbbxxxxxxxbbbbbbxxxxxxxxxxxbbbxxxxxxxxxxxbbbxxxxxxxxxxxbbbxxxxxxxxxbbbbbxxxxxxxx";
+
   vector< vector<Account> > tempmap;
 
   for(int i = 0; i < 10; i++) { //Generate map
     vector<Account> row; // Create an empty row
     for (int j = 0; j < 9; j++) {
-      Account tmp ("---");
+      string tmpString{mapText[i*14+j]};
+      Account tmp (tmpString);
       row.push_back(tmp); // Add an element (column) to the row
     }
     tempmap.push_back(row);
