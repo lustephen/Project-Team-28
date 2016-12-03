@@ -71,7 +71,11 @@ void SortAndCalculate::removeOutOfRangeValues(Buyer *b, vector<Seller*> s)
 	for (unsigned int i = 0; i < s.size(); i++)
 	{
 		if (b->getEstPurchase() < s[i]->getMinPurchase() || b->getExcangeRate() < s[i]->getExcangeRate())
+		{
 			s.erase(s.begin()+i);
+			i--;
+		}
+		
 	}
 }
 
@@ -80,7 +84,10 @@ void SortAndCalculate::removeOutOfRangeValues(Seller *s, vector<Buyer*> b)
 	for (unsigned int i = 0; i < b.size(); i++)
 	{
 		if (b[i]->getEstPurchase() < s->getMinPurchase() || b[i]->getExcangeRate() < s->getExcangeRate())
+		{
 			b.erase(b.begin() + i);
+			i--;
+		}
 	}
 }
 //Might pass a parameter to indicate if it is to be sorted by exrate or distance
