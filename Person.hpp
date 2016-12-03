@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <ctime>
 
 
 class Person
@@ -75,4 +75,23 @@ double randEstPurchase() {
 double randMinPurchase() {
 	double purchase = (double)(rand() % 10) + 1;
 	return purchase;
+}
+
+void createBuyerPop(std::vector<Buyer*> vec) {
+	for (int g = 0; g < 20; g++) {
+		int a = randMonth();
+		char b = randGender();
+		Buyer *buy = new Buyer(randEstPurchase(), randExRate(), a, randDay(a), randYear(), randName(b), b, randUfid());
+		vec.push_back(buy);
+
+	}
+}
+
+void createSellerPop(std::vector<Seller*> vec) {
+	for (int h = 0; h < 20; h++) {
+		int j = randMonth();
+		char z = randGender();
+		Seller *sell = new Seller(randMinPurchase(), randExRate(), j, randDay(j), randYear(), randName(z), z, randUfid());
+		vec.push_back(sell);
+	}
 }
