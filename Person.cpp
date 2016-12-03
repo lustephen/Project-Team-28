@@ -41,32 +41,3 @@ int Person::getYear()
 }
 
 
-int randMonth() {
-	return (rand() % 12 + 1);
-}
-
-int randDay(int m) {
-	if (m == 2) {
-		return rand() % 28 + 1;
-	}
-	else if (m == 4 || m == 5 || m == 8 || m == 11) {
-		return rand() % 30 + 1;
-	}
-	else {
-		return rand() % 31 + 1;
-	}
-}
-
-int randYear() {
-	return rand() % 31 + 1968;					//1968 - 1998
-}
-
-char randGender() {
-	int a = rand() % 2;
-	if (a == 0) {
-		return 'F';
-	}
-	else {
-		return 'M';
-	}
-}
