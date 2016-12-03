@@ -14,7 +14,7 @@ SortAndCalculate::SortAndCalculate(Seller *s, vector<Buyer*> b)
 void SortAndCalculate::buyerFlow()
 {	
 	//calculates the distance each seller must go to reach the buyer
-	calculateDistanceToBuyer();
+	//calculateDistanceToBuyer();
 	//removes all the sellers who do not match the buyer
 	removeOutOfRangeValues(buyer, sellerList);
 	//Sorts the seller list and stores the sorted sellerlist into sorted sellerlist
@@ -27,13 +27,12 @@ void SortAndCalculate::buyerFlow()
 
 void SortAndCalculate::sellerFlow()
 {
-	calculateDistanceToSeller();
+	//calculateDistanceToSeller();
 	removeOutOfRangeValues(seller, buyerList);
 	sortBuyerList();
 	getSelectedBuyer();
 }
-
-//Not tested at all
+/*
 void SortAndCalculate::calculateDistanceToBuyer()
 {
 	double temp = 0;
@@ -48,7 +47,7 @@ void SortAndCalculate::calculateDistanceToBuyer()
 		temp = 0;
 	}
 }
-//not tested
+
 void SortAndCalculate::calculateDistanceToSeller()
 {
 	double temp = 0;
@@ -63,7 +62,7 @@ void SortAndCalculate::calculateDistanceToSeller()
 		temp = 0;
 	}
 }
-
+*/
 
 //Removes the sellers whose requirements do not match the buyers
 void SortAndCalculate::removeOutOfRangeValues(Buyer *b, vector<Seller*> s)
