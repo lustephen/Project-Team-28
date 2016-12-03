@@ -69,6 +69,21 @@ bool Flexbucks::userExists(string user) {
 
 }
 
+bool Flexbucks::save() {
+    Account acc = this -> loggedInAcc;
+
+	  ofstream ofs("accounts/" + acc.getName() + ".fba");
+
+    if(ofs << acc) {
+      ofs.close();
+      return true;
+    }
+
+    ofs.close();
+
+    return false;
+}
+
 bool Flexbucks::createUser(string user, string hPassword, Account acc = Account()) {
     if(userExists(user)) {
         return false;
@@ -136,7 +151,7 @@ bool Flexbucks::removeUser(string user) {
     return found_user;
 }
 
-Account Flexbucks::getLoggedInUser() {
+Account& Flexbucks::getLoggedInUser() {
   return this -> loggedInAcc;
 }
 

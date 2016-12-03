@@ -165,14 +165,12 @@ int main(int argc, const char * argv[]) {
 
   sys.setMap(tempmap);
 
-  Account acc = sys.getLoggedInUser();
-
   string error = "";
   int inp = 0;
 
   while(inp != 4) { //Main ui loop
     printGreetingScreen();
-    cout << acc.titlePrint();
+    cout << sys.getLoggedInUser().titlePrint();
 
     cout << sys.printMap();
 
@@ -208,7 +206,13 @@ int main(int argc, const char * argv[]) {
         clear();
         cout << "Settings Input Page" << endl; //Placeholder
         error = "";
+        cout << "\nInput exchange rate: ";
         cin >> sbinp;
+        sys.getLoggedInUser().getSettings().setExchangeRate(stod(sbinp.c_str()));
+        cout << "\nInput min profit: ";
+        cin >> sbinp;
+        sys.getLoggedInUser().getSettings().setMinProfit(stod(sbinp.c_str()));
+        sys.save();
         break;
       case 4:
         ;

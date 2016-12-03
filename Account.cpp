@@ -10,6 +10,7 @@
 #include <vector>
 #include <cmath>
 #include "Account.hpp"
+#include "Settings.hpp"
 #include "functions.hpp"
 
 using namespace std;
@@ -71,10 +72,18 @@ void Account::setUFID(string ufid) {
   this -> ufid = ufid;
 }
 
+Settings& Account::getSettings() {
+  return this -> settings;
+}
+
+void Account::setSettings(Settings setting) {
+  this -> settings = setting;
+}
+
 string Account::print() {
     return "Name: " + getName() + "\nDOB: " + getDOB() + "\nUFID: " + getUFID() + "\n";
 }
 
 string Account::titlePrint() {
-  return "   Name: " + getName() + "\t\tDOB: " + getDOB() + "\t\tUFID: " + getUFID() + "\n";
+  return "Name: " + getName() + "\tDOB: " + getDOB() + "\tUFID: " + getUFID() + "\tExchange Rate:" + to_string(settings.getExchangeRate()) + "\tMin Profit: " + to_string(settings.getMinProfit()) + "\n";
 }

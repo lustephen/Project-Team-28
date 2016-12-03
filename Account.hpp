@@ -12,9 +12,11 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include "Settings.hpp"
 
 class Account {
 private:
+    Settings settings;
     std::string name;
     int month;
     int day;
@@ -24,6 +26,8 @@ public:
     Account(std::string,std::string,std::string);
     Account(std::string);
     Account();
+    Settings& getSettings();
+    void setSettings(Settings);
     std::string getName();
     void setName(std::string);
     std::string getDOB();
@@ -42,6 +46,7 @@ public:
   		os << acc.day << '\n';
   		os << acc.year << '\n';
   		os << acc.ufid << '\n';
+      os << acc.settings << '\n';
   		return os;
   	}
 
@@ -49,7 +54,7 @@ public:
   	friend std::istream& operator>>(std::istream& is, Account& acc)
   	{
   		// read in individual members of s
-  		is >> acc.name >> acc.month >> acc.day >> acc.year >> acc.ufid;
+  		is >> acc.name >> acc.month >> acc.day >> acc.year >> acc.ufid >> acc.settings;
   		return is;
   	}
 };

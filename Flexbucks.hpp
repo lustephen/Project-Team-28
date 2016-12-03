@@ -27,7 +27,8 @@ public:
     string printMap();
     void setMap(vector< vector<Account> >);
     bool addToMap(Account,int,int);
-    Account getLoggedInUser();
+    Account& getLoggedInUser();
+    bool save();
 private:
     Account loggedInAcc;
     vector< vector<Account> > map;
