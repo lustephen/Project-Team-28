@@ -149,7 +149,7 @@ int main(int argc, const char * argv[]) {
   clear();
 
   // sys.setMap();
-  string mapText = "Bbbbbbbbbbbbbbbbbbbbxxxbbbbbbbbbbbbbbbbbbbbxxxxbbbbxxxxxbxxxxbbbxxxxxxbxxxbbbxxxxxxxbxxxbbbxxxxxxxbxxbbbbxxxxxxxbbbbbbbxxxxxxxbbbbbbxxxxxxxxxxxbbbxxxxxxxxxxxbbbxxxxxxxxxxxbbbxxxxxxxxxbbbbbxxxxxxxx";
+  string mapText = "bbbbbbbbbbbbbbbbbbbbxxxbbbbbbbbbbbbbbbbbbbbxxxxbbbbxxxxxbxxxxbbbxxxxxxbxxxbbbxxxxxxxbxxxbbbxxxxxxxbxxbbbbxxxxxxxbbbbbbbxxxxxxxbbbbbbxxxxxxxxxxxbbbxxxxxxxxxxxbbbxxxxxxxxxxxbbbxxxxxxxxxbbbbbxxxxxxxx";
 
   vector< vector<Account> > tempmap;
 
