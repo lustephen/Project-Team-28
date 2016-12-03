@@ -126,7 +126,7 @@ void SortAndCalculate::sortBuyerList()
 
 Buyer* SortAndCalculate::getSelectedBuyer()
 {
-	return sortedBuyerList[0];
+	return sortedBuyerList[sortedBuyerList.size()-1];
 }
 
 Seller* SortAndCalculate::getSelectedSeller()
