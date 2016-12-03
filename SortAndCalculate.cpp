@@ -1,7 +1,6 @@
 SortAndCalculate::SortAndCalculate(Buyer *b, vector<Seller*> s)
 {
 	buyer = b;
-	removeOutOfRangeValues(b, s);
 	sellerList = s;
 }
 
@@ -16,7 +15,7 @@ void SortAndCalculate::buyerFlow()
 	//calculates the distance each seller must go to reach the buyer
 	//calculateDistanceToBuyer();
 	//removes all the sellers who do not match the buyer
-	removeOutOfRangeValues(buyer, sellerList);
+	removeOutOfRangeValuesForSellerList();
 	//Sorts the seller list and stores the sorted sellerlist into sorted sellerlist
 	//I will need a parameter to know if I should sort with respect to distance or price
 	sortSellerList();
@@ -28,7 +27,7 @@ void SortAndCalculate::buyerFlow()
 void SortAndCalculate::sellerFlow()
 {
 	//calculateDistanceToSeller();
-	removeOutOfRangeValues(seller, buyerList);
+	removeOutOfRangeValuesForBuyerList();
 	sortBuyerList();
 	getSelectedBuyer();
 }
@@ -65,29 +64,31 @@ void SortAndCalculate::calculateDistanceToSeller()
 */
 
 //Removes the sellers whose requirements do not match the buyers
-void SortAndCalculate::removeOutOfRangeValues(Buyer *b, vector<Seller*> s)
+void SortAndCalculate::removeOutOfRangeValuesForSellerList()
 {
-	for (unsigned int i = 0; i < s.size(); i++)
+
+	for (int i = 0; i < sellerList.size(); i++)
 	{
-		if (b->getEstPurchase() < s[i]->getMinPurchase() || b->getExcangeRate() < s[i]->getExcangeRate())
+		if (buyer->getEstPurchase() < sellerList[i]->getMinPurchase() || buyer->getExchangeRate() < sellerList[i]->getExchangeRate())
 		{
-			s.erase(s.begin()+i);
+			sellerList.erase(sellerList.begin() + i);
 			i--;
 		}
-		
 	}
+	
 }
 
-void SortAndCalculate::removeOutOfRangeValues(Seller *s, vector<Buyer*> b)
+void SortAndCalculate::removeOutOfRangeValuesForBuyerList()
 {
-	for (unsigned int i = 0; i < b.size(); i++)
+	for (unsigned int i = 0; i < buyerList.size(); i++)
 	{
-		if (b[i]->getEstPurchase() < s->getMinPurchase() || b[i]->getExcangeRate() < s->getExcangeRate())
+		if (buyerList[i]->getEstPurchase() < seller->getMinPurchase() || buyerList[i]->getExchangeRate() < seller->getExchangeRate())
 		{
-			b.erase(b.begin() + i);
+			buyerList.erase(buyerList.begin() + i);
 			i--;
 		}
 	}
+	
 }
 //Might pass a parameter to indicate if it is to be sorted by exrate or distance
 void SortAndCalculate::sortSellerList()
