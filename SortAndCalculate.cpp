@@ -118,7 +118,7 @@ void SortAndCalculate::sortBuyerList()
 	for (unsigned int i = 0; i < buyerList.size(); i++)
 		oak->addLeaf(buyerList[i]->getDistanceToSeller(), buyerList[i]);
 	*/
-	oak->inOrderSellerList(oak->root);
+	oak->inOrderBuyerList(oak->root);
 
 	for (unsigned int i = 0; i < buyerList.size(); i++)
 		sortedBuyerList.push_back(oak->getSortedBuyerList()[i]);
