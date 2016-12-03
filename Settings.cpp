@@ -1,4 +1,4 @@
-#include "Settings.h"
+#include "Settings.hpp"
 
 void Settings::setMaxDistance(double max)
 {
