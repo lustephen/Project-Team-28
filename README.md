@@ -6,6 +6,6 @@ $ ./MainTester
 ```
 Run Main:
 ```
-$ g++ -o main sha/*.cpp Account.cpp Flexbucks.cpp functions.cpp UInterface.cpp
+$ g++ -o main sha/*.cpp Account.cpp Flexbucks.cpp functions.cpp UInterface.cpp Settings.cpp Person.cpp
 $ ./main
 ```
