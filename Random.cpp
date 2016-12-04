@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math>
 #include <vectors>
+#include <string>
 #include "Random.hpp"
 
 
