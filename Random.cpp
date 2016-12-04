@@ -4,8 +4,6 @@
 #include <string>
 #include "Random.hpp"
 
-
-
 static int Random::randMonth() {
 	return (rand() % 12 + 1);
 }
