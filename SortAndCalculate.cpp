@@ -16,7 +16,6 @@ void SortAndCalculate::buyerFlow()
 	//calculateDistanceToBuyer();
 	//removes all the sellers who do not match the buyer
 	//Sorts the seller list and stores the sorted sellerlist into sorted sellerlist
-	//I will need a parameter to know if I should sort with respect to distance or price
 	sortSellerList();
 	//returns the lowest price or distance
 	getSelectedSeller();
@@ -29,7 +28,14 @@ void SortAndCalculate::sellerFlow()
 	sortBuyerList();
 	getSelectedBuyer();
 }
-
+/*
+This function checks if there are any buyers who meet
+the requirements of the seller. If there is at least
+one buyer who meets the requirements of the seller
+the function returns true. Otherwise when no buyers
+meet the requirements of the seller the function 
+returns false
+*/
 bool SortAndCalculate::avaliableBuyerCheck()
 {
 	removeOutOfRangeValuesForBuyerList();
@@ -37,7 +43,14 @@ bool SortAndCalculate::avaliableBuyerCheck()
 		return false;
 	return true;
 }
-
+/*
+This function checks if there are any sellers who meet
+the requirements of the buyer. If there is at least
+one seller who meets the requirements of the buyer
+the function returns true. Otherwise when no sellers
+meet the requirements of the buyer the function 
+returns false.
+*/
 bool SortAndCalculate::avaliableSellerCheck()
 {
 	removeOutOfRangeValuesForSellerList();
@@ -77,7 +90,12 @@ void SortAndCalculate::calculateDistanceToSeller()
 }
 */
 
-//Removes the sellers whose requirements do not match the buyers
+/*
+Removes the sellers whose requirements do not match the buyers
+Ie. it removes sellers whose min purchase requirement is greater
+than the buyers estimated purchase, and it removes sellers whose
+exchange rate is greater than the buyers exchange rate.
+*/
 void SortAndCalculate::removeOutOfRangeValuesForSellerList()
 {
 
@@ -91,7 +109,12 @@ void SortAndCalculate::removeOutOfRangeValuesForSellerList()
 	}
 	
 }
-
+/*
+Removes the buyers whose requirements do no match the sellers
+ie. if the buyers est purchase is less than the sellers min
+purchase the buyer is removed. Additionally if the buyers exchange
+rate is less than the sellers the buyer is also removed.
+*/
 void SortAndCalculate::removeOutOfRangeValuesForBuyerList()
 {
 	for (unsigned int i = 0; i < buyerList.size(); i++)
@@ -104,7 +127,14 @@ void SortAndCalculate::removeOutOfRangeValuesForBuyerList()
 	}
 	
 }
-//Might pass a parameter to indicate if it is to be sorted by exrate or distance
+/*
+This function creates a tree object. That uses a binary search
+tree to sort the seller list by the exchange rate. It then puts 
+the seller list in order with inOrderSellerList(this function
+contains a vector of type Seller* which it fills). Then the 
+vector sortedSellerList is filled with the sellers in order
+(lowest exchange rate to highest)
+*/
 void SortAndCalculate::sortSellerList()
 {
 	tree *elm = new tree();
@@ -120,7 +150,14 @@ void SortAndCalculate::sortSellerList()
 	for (unsigned int i = 0; i < sellerList.size(); i++)
 		sortedSellerList.push_back(elm->getSortedSellerList()[i]);
 }
-
+/*
+This function creates a tree object. That uses a binary search
+tree to sort the buyerr list by the exchange rate. It then puts 
+the buyerr list in order with inOrderBuyerList(this function
+contains a vector of type Buyer* which it fills). Then the 
+vector sortedBuyerList is filled with the buyer in order
+(lowest exchange rate to highest)
+*/
 void SortAndCalculate::sortBuyerList()
 {
 	tree *oak = new tree();
@@ -137,12 +174,18 @@ void SortAndCalculate::sortBuyerList()
 	for (unsigned int i = 0; i < buyerList.size(); i++)
 		sortedBuyerList.push_back(oak->getSortedBuyerList()[i]);
 }
-
+/*
+returns the buyer who matches the sellers requirements with 
+the highest exchange rate
+*/
 Buyer* SortAndCalculate::getSelectedBuyer()
 {
 	return sortedBuyerList[sortedBuyerList.size()-1];
 }
-
+/*
+returns the seller who matches the buyers requirements with 
+the lowest exchange rate
+*/
 Seller* SortAndCalculate::getSelectedSeller()
 {
 	return sortedSellerList[0];
