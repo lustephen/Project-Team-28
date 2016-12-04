@@ -55,8 +55,10 @@ static double Random::randMinPurchase() {
 }
 
 std::string Random::randName(char g) {
-	std::vector<std::string> femalenames = { "Susan", "Rebecca" , "Nicole" , "Alexis" , "Zoe" , "Kayla" };
-	std::vector<std::string> malenames = { "Daniel", "Alex", "Ajax", "Michael", "Brian", "Jeffrey" };
+	std::vector<std::string> femalenames = { "Susan", "Rebecca" , "Nicole" , "Alexis" , "Zoe" , "Kayla" , "Alison" , "Ariana" , "Catherine" ;
+					       "Cat", "Betty", "Sarah", "Monica", "Ashley", "Ally", "Serena", "Selena", "Yvonne", "Ari", "Anna"};
+	std::vector<std::string> malenames = { "Daniel", "Alex", "Ajax", "Michael", "Brian", "Jeffrey", "Adam", "John", "Jon", "James", "Fred", 
+					     "Dean", "Harry", "Alexander", "Graham", "Josh", "Gary", "Sean", "Danny", "Mateo"};
 	int place = rand() % 6;
 
 	if (g == 'F') {
