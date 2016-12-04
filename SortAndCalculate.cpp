@@ -1,3 +1,9 @@
+#include <vector>
+#include "Tree.hpp"
+#include "SortAndCalculate.hpp"
+
+using namespace std;
+
 SortAndCalculate::SortAndCalculate(Buyer *b, vector<Seller*> s)
 {
 	buyer = b;
@@ -11,14 +17,14 @@ SortAndCalculate::SortAndCalculate(Seller *s, vector<Buyer*> b)
 }
 
 void SortAndCalculate::buyerFlow()
-{	
+{
 	//Sorts the seller list and stores the sorted sellerlist into sorted sellerlist
 	sortSellerList();
 }
 
 void SortAndCalculate::sellerFlow()
 {
-	
+
 	sortBuyerList();
 }
 /*
@@ -26,7 +32,7 @@ This function checks if there are any buyers who meet
 the requirements of the seller. If there is at least
 one buyer who meets the requirements of the seller
 the function returns true. Otherwise when no buyers
-meet the requirements of the seller the function 
+meet the requirements of the seller the function
 returns false
 */
 bool SortAndCalculate::avaliableBuyerCheck()
@@ -41,7 +47,7 @@ This function checks if there are any sellers who meet
 the requirements of the buyer. If there is at least
 one seller who meets the requirements of the buyer
 the function returns true. Otherwise when no sellers
-meet the requirements of the buyer the function 
+meet the requirements of the buyer the function
 returns false.
 */
 bool SortAndCalculate::avaliableSellerCheck()
@@ -100,7 +106,7 @@ void SortAndCalculate::removeOutOfRangeValuesForSellerList()
 			i--;
 		}
 	}
-	
+
 }
 /*
 Removes the buyers whose requirements do no match the sellers
@@ -118,13 +124,13 @@ void SortAndCalculate::removeOutOfRangeValuesForBuyerList()
 			i--;
 		}
 	}
-	
+
 }
 /*
 This function creates a tree object. That uses a binary search
-tree to sort the seller list by the exchange rate. It then puts 
+tree to sort the seller list by the exchange rate. It then puts
 the seller list in order with inOrderSellerList(this function
-contains a vector of type Seller* which it fills). Then the 
+contains a vector of type Seller* which it fills). Then the
 vector sortedSellerList is filled with the sellers in order
 (lowest exchange rate to highest)
 */
@@ -133,7 +139,7 @@ void SortAndCalculate::sortSellerList()
 	tree *elm = new tree();
 
 	for (unsigned int i = 0; i < sellerList.size(); i++)
-		elm->addLeaf(sellerList[i]->getExcangeRate(), sellerList[i]);
+		elm->addLeaf(sellerList[i]->getExchangeRate(), sellerList[i]);
 	/*
 	if(distance )
 	for (unsigned int i = 0; i < sellerList.size(); i++)
@@ -145,9 +151,9 @@ void SortAndCalculate::sortSellerList()
 }
 /*
 This function creates a tree object. That uses a binary search
-tree to sort the buyerr list by the exchange rate. It then puts 
+tree to sort the buyerr list by the exchange rate. It then puts
 the buyerr list in order with inOrderBuyerList(this function
-contains a vector of type Buyer* which it fills). Then the 
+contains a vector of type Buyer* which it fills). Then the
 vector sortedBuyerList is filled with the buyer in order
 (lowest exchange rate to highest)
 */
@@ -156,7 +162,7 @@ void SortAndCalculate::sortBuyerList()
 	tree *oak = new tree();
 
 	for (unsigned int i = 0; i < buyerList.size(); i++)
-		oak->addLeaf(buyerList[i]->getExcangeRate(), buyerList[i]);
+		oak->addLeaf(buyerList[i]->getExchangeRate(), buyerList[i]);
 	/*
 	if(distance or whatever)
 	for (unsigned int i = 0; i < buyerList.size(); i++)
@@ -168,7 +174,7 @@ void SortAndCalculate::sortBuyerList()
 		sortedBuyerList.push_back(oak->getSortedBuyerList()[i]);
 }
 /*
-returns the buyer who matches the sellers requirements with 
+returns the buyer who matches the sellers requirements with
 the highest exchange rate
 */
 Buyer* SortAndCalculate::getSelectedBuyer()
@@ -176,7 +182,7 @@ Buyer* SortAndCalculate::getSelectedBuyer()
 	return sortedBuyerList[sortedBuyerList.size()-1];
 }
 /*
-returns the seller who matches the buyers requirements with 
+returns the seller who matches the buyers requirements with
 the lowest exchange rate
 */
 Seller* SortAndCalculate::getSelectedSeller()

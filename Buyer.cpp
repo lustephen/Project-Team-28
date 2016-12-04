@@ -2,10 +2,14 @@
 #include<vector>
 #include"Buyer.hpp"
 #include"person.hpp"
-Buyer::Buyer(double est, double ex, int mm, int dd, int yr, std::string n, char u, int ufid) : Person(mm, dd, yr, n, u, ufid)
+
+using namespace std;
+
+Buyer::Buyer(double est, double ex, int mm, int dd, int yr, string n, char u, string ufid) : Person(n, mm, dd, yr, u, ufid)
 {
 	estPurchase = est;
 	exRate = ex;
+	Person(n,dd,mm,yr,u,ufid);
 }
 Buyer::Buyer(double est, double ex)
 {
@@ -14,6 +18,7 @@ Buyer::Buyer(double est, double ex)
 	estPurchase = est;
 	//maxDist = max;
 	exRate = ex;
+	Person();
 }
 
 /*
@@ -32,7 +37,7 @@ double Buyer::getEstPurchase()
 	return estPurchase;
 }
 
-double Buyer::getExcangeRate()
+double Buyer::getExchangeRate()
 {
 	return exRate;
 }

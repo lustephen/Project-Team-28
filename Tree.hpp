@@ -1,3 +1,10 @@
+#ifndef Tree_hpp
+#define Tree_hpp
+
+#include "Buyer.hpp"
+#include "Seller.hpp"
+#include <vector>
+
 class tree
 {
 private:
@@ -11,14 +18,14 @@ private:
 		node* right;
 	};
 
-	
+
 	node* makeLeaf(double data, Buyer *b);
 	void addLeaf(double data, node* p, Buyer *b);
 
 	node* makeLeaf(double data, Seller* s);
 	void addLeaf(double data, node* p, Seller* s);
-	vector <Seller*> sortedSellerList;
-	vector<Buyer*> sortedBuyerList;
+	std::vector <Seller*> sortedSellerList;
+	std::vector<Buyer*> sortedBuyerList;
 public:
 	node* root;
 	tree();
@@ -27,7 +34,8 @@ public:
 	void addLeaf(double data, Seller* s);
 	void inOrderBuyerList(node* n);
 	void inOrderSellerList(node* n);
-	vector<Seller*> getSortedSellerList();
-	vector<Buyer*> getSortedBuyerList();
-
+	std::vector<Seller*> getSortedSellerList();
+	std::vector<Buyer*> getSortedBuyerList();
 };
+
+#endif

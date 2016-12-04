@@ -1,14 +1,18 @@
+#ifndef SortAndCalculate_hpp
+#define SortAndCalculate_hpp
+
 #include<vector>
 #include"Seller.hpp"
 #include"Buyer.hpp"
+
 class SortAndCalculate
 {
 	Buyer *buyer;
 	Seller *seller;
-	vector<Seller*> sellerList;
-	vector<Buyer*> buyerList;
-	vector<Seller*> sortedSellerList;
-	vector<Buyer*> sortedBuyerList;
+	std::vector<Seller*> sellerList;
+	std::vector<Buyer*> buyerList;
+	std::vector<Seller*> sortedSellerList;
+	std::vector<Buyer*> sortedBuyerList;
 	void sortSellerList();
 	void sortBuyerList();
 	void removeOutOfRangeValuesForSellerList();
@@ -17,8 +21,8 @@ class SortAndCalculate
 	//void calculateDistanceToSeller();
 
 public:
-	SortAndCalculate(Buyer *b, vector<Seller*> s);
-	SortAndCalculate(Seller *s, vector<Buyer*> b);
+	SortAndCalculate(Buyer *b, std::vector<Seller*> s);
+	SortAndCalculate(Seller *s, std::vector<Buyer*> b);
 	bool avaliableSellerCheck();
 	bool avaliableBuyerCheck();
 	Buyer* getSelectedBuyer();
@@ -26,5 +30,7 @@ public:
 
 	void buyerFlow();
 	void sellerFlow();
-	
+
 };
+
+#endif

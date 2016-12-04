@@ -3,18 +3,22 @@
 #include"Seller.hpp"
 #include"Person.hpp"
 
+using namespace std;
+
 Seller::Seller(double min, double ex)
 {
 	//for (int i = 0; i < locationCoordinateSize; i++)
 		//location[i] = l[i];
-	minPurhcase = min;
+	minPurchase = min;
 	//maxDist = max;
 	exRate = ex;
+	Person();
 }
-Seller::Seller(double min, double ex, int mm, int dd, int yr, std::string n, char u, int ufid) : Person(mm, dd, yr, n, u, ufid)
+Seller::Seller(double min, double ex, int mm, int dd, int yr, string n, char u, string ufid) : Person(n, mm, dd, yr, u, ufid)
 {
 	minPurchase = min;
 	exRate = ex;
+	Person(n,mm,dd,yr,u,ufid);
 }
 /*
 void Seller::setDistanceToBuyer(double dist)
@@ -29,10 +33,10 @@ double Seller::getMaxDist()
 */
 double Seller::getMinPurchase()
 {
-	return minPurhcase;
+	return minPurchase;
 }
 
-double Seller::getExcangeRate()
+double Seller::getExchangeRate()
 {
 	return exRate;
 }
