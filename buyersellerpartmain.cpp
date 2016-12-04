@@ -254,7 +254,7 @@ int main() {
 
 		//Pass to seller lass to find best person (highest exchange rate and meets min purchase requirement)
 
-		/*
+		
 		Seller *user2 = new Seller(varMinPurchase, varExchangeRate);
 		std::vector<Buyer*> buyerlist;
 		createSellerPop(buyerlist);
@@ -327,11 +327,7 @@ int main() {
 		break;
 	}
 
-		NEED TROUBLESHOOTING AFTER THIS (Danilo, Beatrice)
-		Check to see if something in vector meets requirements
-
-		Pass parameters to find best buyer for the user to sell to
-		*/
+		
 
 
 	std::cout << "Processing..." << std::endl;
