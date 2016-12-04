@@ -102,25 +102,19 @@ int main() {
 	createSellerPop(sellerlist);
 	SortAndCalculate *sellercompute = new SortAndCalculate(user, sellerlist);
 
-	NEED TROUBLESHOOTING AFTER THIS (Danilo, Beatrice)
-
+	
 	if(sellercompute->avaliableSellerCheck())
 	{
 		bool tr = false;
 		char Y_N;
 		sellercompute->buyerFlow();
-		//Don't know what you want to do with the selected seller
+		
 		Seller *selectedSeller=sellercompute->getSelectedSeller();
 		std::cout<<"Seller: "<<selectedSeller->getName()<<" has exchange rate: "<<selectedSeller->getExchangeRate()<<std::endl;
 		std::cout<<"Would you like to trade with "<<selectedSeller->getName()<<" Y/N"<<std::endl;
 		cin >> Y_N;
 		
-		//trouble shooting here for poor input
-		//if(~="Y"||"y")
-		//pass the seller to a seller vector in the account class? to store the seller
-		//else
-		//std::cout<<"Seller not selected. FlexBucksMarket will now exit. Have a nice day!"<<std::endl;
-		
+			
 		do
 		{
 			if(Y_N == 'Y' || Y_N == 'y')
@@ -265,9 +259,8 @@ int main() {
 		bool fl = false;
 		char Y_N;
 		
-		buyercompute->sellerrFlow();
+		buyercompute->sellerFlow();
 		
-		//Don't know what you want to do with the selected seller
 		
 		Buyer *selectedBuyer=buyercompute->getSelectedBuyer();
 		
@@ -278,11 +271,7 @@ int main() {
 		
 		cin >> Y_N;
 		
-		//trouble shooting here for poor input
-		//if(~="Y"||"y")
-		//pass the buyer to a buyer vector in the account class? to store the buyer
-		//else
-		//std::cout<<"Buyer not selected. FlexBucksMarket will now exit. Have a nice day!"<<std::endl;
+	
 		
 		do
 		{
