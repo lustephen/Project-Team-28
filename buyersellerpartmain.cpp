@@ -269,7 +269,7 @@ int main() {
 		
 		std::cout<<"Would you like to trade with "<<selectedBuyer->getName()<<" Y/N"<<std::endl;
 		
-		cin >> Y_N;
+		std::cin >> Y_N;
 		
 	
 		
@@ -312,7 +312,7 @@ int main() {
 
 	else
 	{
-		cout << "There is no match << endl;
+		cout << "There is no match" << endl;
 		break;
 	}
 
