@@ -8,8 +8,13 @@ tree::tree()
 	root = 0;
 }
 
-//Buyer
 
+/*
+Functions for Buyer
+Sorts the tree with respect to the data sent
+It stores the data and Buyer who contains that
+data.
+*/
 tree::node* tree::makeLeaf(double data, Buyer *b)
 {
 	node* n = new node();
@@ -32,10 +37,8 @@ void tree::addLeaf(double data, node* p, Buyer *b)
 		root = makeLeaf(data, b);
 	}
 
-	//This is what I planned to do. Currently I just stick it on the left tree
-
-	/*Only look at cases that are less than or greater than. If the values are equivalent than
-	look at which has a smaller distance between them or lower price.
+	/*
+	If the data is equal it simply sticks it on the left node of the tree
 	*/
 	else if (data <= p->data)
 	{
@@ -58,8 +61,12 @@ void tree::addLeaf(double data, node* p, Buyer *b)
 	}
 }
 
-
-//Seller
+/*
+Functions for Seller
+Sorts the tree with respect to the data sent
+It stores the data, and Seller who contains that
+data.
+*/
 
 tree::node* tree::makeLeaf(double data, Seller *s)
 {
@@ -75,7 +82,9 @@ void tree::addLeaf(double data, Seller* s)
 {
 	addLeaf(data, root, s);
 }
-
+	/*
+	If the data is equal it simply sticks it on the left node of the tree
+	*/
 void tree::addLeaf(double data, node* p, Seller* s)
 {
 	if (root == 0)
@@ -103,7 +112,11 @@ void tree::addLeaf(double data, node* p, Seller* s)
 			p->right = makeLeaf(data, s);
 	}
 }
-
+/*
+It stores the Sellers into the vector sortedSellerList
+by lowest data to highest data(in this case data is the
+exchange rate)
+*/
 void tree::inOrderSellerList(node* n)
 {
 	if (n == 0)
@@ -114,7 +127,11 @@ void tree::inOrderSellerList(node* n)
 
 
 }
-
+/*
+It stores the Buyer into the vector sortedBuyerList
+by lowest data to highest data(in this case data is the
+exchange rate)
+*/
 void tree::inOrderBuyerList(node* n)
 {
 	if (n == 0)
@@ -125,12 +142,20 @@ void tree::inOrderBuyerList(node* n)
 
 
 }
-
+/*
+This returns the sortedList to the SortAndCalculate
+class where further manipulations of the list can be
+done if needed.
+*/
 std::vector<Seller*> tree::getSortedSellerList()
 {
 	return sortedSellerList;
 }
-
+/*
+This returns the sortedList to the SortAndCalculate
+class where further manipulations of the list can be
+done if needed.
+*/
 std::vector<Buyer*> tree::getSortedBuyerList()
 {
 	return sortedBuyerList;
