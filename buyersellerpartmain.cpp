@@ -96,7 +96,8 @@ int main() {
 
 	//Pass to buyer class to find best person (lowest exchange rate, meets sellers min purchase requirement)
 
-	/*Buyer *user = new Buyer(varEstPurchase, varExchangeRate);
+	/*
+	Buyer *user = new Buyer(varEstPurchase, varExchangeRate);
 	std::vector<Seller*> sellerlist;
 	createSellerPop(sellerlist);
 	SortAndCalculate *sellercompute = new SortAndCalculate(user, sellerlist);
@@ -105,7 +106,17 @@ int main() {
 
 	if(sellercompute->avaliableSellerCheck())
 	{
-		//continue program
+		sellercompute->buyerFlow();
+		//Don't know what you want to do with the selected seller
+		Seller *selectedSeller=sellercompute->getSelectedSeller();
+		std::cout<<"Seller: "<<selectedSeller->getName()<<" has exchange rate: "<<selectedSeller->getExchangeRate()<<std::endl;
+		std::cout<<"Would you like to trade with "<<selectedSeller->getName()<<" Y/N"<<std::endl;
+		//trouble shooting here for poor input
+		//if(~="Y"||"y")
+		//pass the seller to a seller vector in the account class? to store the seller
+		else
+		std::cout<<"Seller not selected. FlexBucksMarket will now exit. Have a nice day!"<<std::endl;
+		
 	}
 
 	else
@@ -209,10 +220,33 @@ int main() {
 
 		//Pass to seller lass to find best person (highest exchange rate and meets min purchase requirement)
 
-		/*Seller *user2 = new Seller(varMinPurchase, varExchangeRate);
+		/*
+		Seller *user2 = new Seller(varMinPurchase, varExchangeRate);
 		std::vector<Buyer*> buyerlist;
 		createSellerPop(buyerlist);
 		SortAndCalculate *buyercompute = new SortAndCalculate(user2, buyerlist);
+		
+		if(buyercompute->avaliableSellerCheck())
+	{
+		buyercompute->sellerrFlow();
+		//Don't know what you want to do with the selected seller
+		Buyer *selectedBuyer=buyercompute->getSelectedBuyer();
+		std::cout<<"Buyer: "<<selectedBuyer->getName()<<" has exchange rate: "<<selectedBuyer->getExchangeRate()
+		<<" and a estimated purchase of "<<selectedBuyer->getEstPurchase()<<std::endl;
+		std::cout<<"Would you like to trade with "<<selectedBuyer->getName()<<" Y/N"<<std::endl;
+		//trouble shooting here for poor input
+		//if(~="Y"||"y")
+		//pass the buyer to a buyer vector in the account class? to store the buyer
+		else
+		std::cout<<"Buyer not selected. FlexBucksMarket will now exit. Have a nice day!"<<std::endl;
+		
+	}
+
+	else
+	{
+		cout << "There is no match << endl;
+		break;
+	}
 
 		NEED TROUBLESHOOTING AFTER THIS (Danilo, Beatrice)
 		Check to see if something in vector meets requirements
