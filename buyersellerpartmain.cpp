@@ -125,7 +125,14 @@ int main() {
 		{
 			if(Y_N == 'Y' || Y_N == 'y')
 			{
-				//pass users estpurcahse sellers exchange rate and sellers name
+				//pass users estpurchase sellers exchange rate and sellers name
+				cout << "Transaction successfully completed!" << endl;
+				
+				setName(selectedSeller->getName());
+				setExchangeRate(selectedSeller->getExchangeRate());
+				setPurchase(user->getEstPurchase());
+				
+				break;
 			}
 		
 			else if(Y_N == 'N' || Y_N == 'n')
@@ -284,6 +291,13 @@ int main() {
 			if(Y_N == 'Y' || Y_N == 'y')
 			{
 				//pass buyers' name, exchange rate, and estimated purchase.
+				cout << "Transaction successfully completed!" << endl;
+				
+				setName(user2->getName());
+				setExchangeRate(user2->getExchangeRate());
+				setPurchase(user2->getEstPurchase());
+				
+				break;
 			}
 			
 			else if(Y_N == 'N' || Y_N == 'n')
