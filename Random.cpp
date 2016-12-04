@@ -56,7 +56,7 @@ static double Random::randMinPurchase() {
 	return purchase;
 }
 
-std::string randName(char g) {
+std::string Random::randName(char g) {
 	std::vector<std::string> femalenames = { "Susan", "Rebecca" , "Nicole" , "Alexis" , "Zoe" , "Kayla" };
 	std::vector<std::string> malenames = { "Daniel", "Alex", "Ajax", "Michael", "Brian", "Jeffrey" };
 	int place = rand() % 6;
