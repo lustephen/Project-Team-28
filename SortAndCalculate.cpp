@@ -12,21 +12,14 @@ SortAndCalculate::SortAndCalculate(Seller *s, vector<Buyer*> b)
 
 void SortAndCalculate::buyerFlow()
 {	
-	//calculates the distance each seller must go to reach the buyer
-	//calculateDistanceToBuyer();
-	//removes all the sellers who do not match the buyer
 	//Sorts the seller list and stores the sorted sellerlist into sorted sellerlist
 	sortSellerList();
-	//returns the lowest price or distance
-	getSelectedSeller();
-
 }
 
 void SortAndCalculate::sellerFlow()
 {
-	//calculateDistanceToSeller();
+	
 	sortBuyerList();
-	getSelectedBuyer();
 }
 /*
 This function checks if there are any buyers who meet
