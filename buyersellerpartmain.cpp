@@ -102,7 +102,37 @@ int main() {
 	SortAndCalculate *sellercompute = new SortAndCalculate(user, sellerlist);
 
 	NEED TROUBLESHOOTING AFTER THIS (Danilo, Beatrice)
-	Check to see if something in vector meets requirements
+	//troubleshooting
+	
+	int num = 0;
+	
+	for(int i = 0; i < sellercompute->sellerList.size(); i++)
+	{
+		if(sellercompute->sellerList[i]->getMinPurchase() < varEstPurchase || sellercompute->sellerList[i]->getExchangeRate() < varExchangeRate)
+		{
+			num++;
+		}
+	}
+	
+	if(num != 0)
+	{
+		if(sellercompute->avaliableSellerCheck())
+		{
+			//continue program
+		}
+
+		else
+		{
+			cout << "There is no match << endl;
+			break;
+		}
+	}
+	
+	else
+	{
+		cout << "There is no match" << endl;
+		break;
+	}
 
 	Pass parameters to find best Seller for the user to buy from
 	
