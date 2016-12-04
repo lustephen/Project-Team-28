@@ -1,6 +1,8 @@
 #include <iostream>
 #include <math>
-#include "Random.cpp"
+#include <vectors>
+#include "Random.hpp"
+
 
 
 static int Random::randMonth() {
