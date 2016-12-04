@@ -96,7 +96,7 @@ int main() {
 
 	//Pass to buyer class to find best person (lowest exchange rate, meets sellers min purchase requirement)
 
-	/*
+	
 	Buyer *user = new Buyer(varEstPurchase, varExchangeRate);
 	std::vector<Seller*> sellerlist;
 	createSellerPop(sellerlist);
@@ -161,9 +161,7 @@ int main() {
 		break;
 	}
 
-	Pass parameters to find best Seller for the user to buy from
 	
-	*/
 
 
 
