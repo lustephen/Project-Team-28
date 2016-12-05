@@ -489,8 +489,10 @@ int main(int argc, const char * argv[]) {
   while(inp != 4) { //Main ui loop
     printGreetingScreen();
     cout << sys.getLoggedInUser().titlePrint();
-
+		
+		cout <<
     cout << sys.printMap();
+    cout << "\nReitz Union Food Court Map\nKey: P = Panda Express, C = Croutons, J = Papa John's\nW = Wendy's, S = Starbucks, T = Pollo Tropical, x = Wall\n\n";
 
     printMainMenu();
 
