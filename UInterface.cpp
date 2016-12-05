@@ -126,7 +126,7 @@ void printGreetingScreen() {
 void printMainMenu() {
   cout << "  1) Buy" << endl;
   cout << "  2) Sell" << endl;
-  cout << "  3) Settings" << endl;
+  cout << "  3) View Transaction History" << endl;
   cout << "  4) Exit" << endl;
 }
 
@@ -195,7 +195,7 @@ void BuyerOptions() {
 					if (decision2 == "Y" || decision2 == "y") {
 						holder = 1;
 						staller = 1;
-						count == 0;
+						count = 0;
 					}
 					else if (decision2 == "N" || decision2 == "n") {
 						holder = 1;
@@ -347,7 +347,7 @@ void SellerOptions()
 					if (sdecision2 == "Y" || sdecision2 == "y") {
 						sholder = 1;
 						sstaller = 1;
-						scount == 0;
+						scount = 0;
 					}
 					else if (sdecision2 == "N" || sdecision2 == "n") {
 						sholder = 1;
@@ -371,66 +371,66 @@ void SellerOptions()
 
 		//Pass to seller lass to find best person (highest exchange rate and meets min purchase requirement)
 
-		
+
 		Seller *user2 = new Seller(varMinPurchase, varExchangeRate2);
 		std::vector<Buyer*> buyerlist;
 		buyerlist = Random::createBuyerPop();
 		SortAndCalculate *buyercompute = new SortAndCalculate(user2, buyerlist);
-		
+
 			if(buyercompute->avaliableBuyerCheck())
 	{
 		bool fl = false;
 		char Y_N;
-		
+
 		buyercompute->sellerFlow();
-		
-		
+
+
 		Buyer *selectedBuyer=buyercompute->getSelectedBuyer();
-		
+
 		std::cout<<"Buyer: "<<selectedBuyer->getName()<<" has exchange rate: "<<selectedBuyer->getExchangeRate()
 		<<" and a estimated purchase of "<<selectedBuyer->getEstPurchase()<<std::endl;
-		
+
 		std::cout<<"Would you like to trade with "<<selectedBuyer->getName()<<" Y/N"<<std::endl;
-		
+
 		std::cin >> Y_N;
-		
-	
-		
+
+
+
 		do
 		{
 			if(Y_N == 'Y' || Y_N == 'y')
 			{
 				//pass buyers' name, exchange rate, and estimated purchase.
 				cout << "Transaction successfully completed!" << endl;
-				
+
 				//setName(user2->getName());
 				//setExchangeRate(user2->getExchangeRate());
 				//setPurchase(user2->getEstPurchase());
-				
+
 				break;
 			}
-			
+
 			else if(Y_N == 'N' || Y_N == 'n')
 			{
 				cout << "Transaction cancelled. Have a nice day!" << endl;
 				break;
 			}
-			
+
 			else
 			{
 				cout << "Error: Invalid Input" << endl;
 				fl = true;
-				
+
 				std::cout<<"Buyer: "<<selectedBuyer->getName()<<" has exchange rate: "<<selectedBuyer->getExchangeRate()
 				<<" and a estimated purchase of "<<selectedBuyer->getEstPurchase()<<std::endl;
-		
+
 				std::cout<<"Would you like to trade with "<<selectedBuyer->getName()<<" Y/N"<<std::endl;
-				
+
 				cin >> Y_N;
 			}
-		
+
 		}while(fl);
-		
+
 	}
 
 	else
@@ -503,6 +503,8 @@ int main(int argc, const char * argv[]) {
     }
 
     string sbinp;
+    int count = 1;
+    std::string dummy;
 
     switch(inp) {
       case 1:
@@ -518,15 +520,15 @@ int main(int argc, const char * argv[]) {
         break;
       case 3:
         clear();
-        cout << "Settings Input Page" << endl; //Placeholder
-        error = "";
-        cout << "\nInput exchange rate: ";
-        cin >> sbinp;
-        sys.getLoggedInUser().getSettings().setExchangeRate(stod(sbinp.c_str()));
-        cout << "\nInput min profit: ";
-        cin >> sbinp;
-        sys.getLoggedInUser().getSettings().setMinPurchase(stod(sbinp.c_str()));
-        sys.save();
+        for(Transaction t: sys.getLoggedInUser().getTransactionHistory()) {
+          cout << "Transaction: " << count << endl;
+          cout << "\tName: " << t.getName() << endl;
+          cout << "\tRate: " << t.getExchangeRate() << endl;
+          cout << "\tPurchased: " << t.getPurchase() << endl;
+          count++;
+        }
+        cout << "\nEnter m to return to the (m)enu: "
+        cin >> dummy;
         break;
       case 4:
         ;
