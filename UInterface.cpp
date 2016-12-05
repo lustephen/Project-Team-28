@@ -226,9 +226,6 @@ void BuyerOptions() {
 	Buyer *user = new Buyer(varEstPurchase, varExchangeRate);
 	std::vector<Seller*> sellerlist;
 	sellerlist = Random::createSellerPop();
-	std::cout << sellerlist.size();  //Debug
-	string temp;
-	cin>>temp;
 	SortAndCalculate *sellercompute = new SortAndCalculate(user, sellerlist);
 
 
