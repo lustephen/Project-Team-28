@@ -46,6 +46,14 @@ void Account::setPerson(Person p) {
   this -> person = p;
 }
 
+void Account::addTransaction (Transaction t) {
+  this -> transactions.push_back(t);
+}
+
+vector<Transaction> Account::getTransactionHistory() {
+  return this -> transactions;
+}
+
 string Account::print() {
     return "Name: " + person.getName() + "\nDOB: " + person.getDOB() + "\nUFID: " + person.getID() + "\n";
 }

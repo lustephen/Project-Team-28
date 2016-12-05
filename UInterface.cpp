@@ -13,6 +13,7 @@
 #include "Flexbucks.hpp"
 #include "Buyer.hpp"
 #include "Seller.hpp"
+#include "Random.hpp"
 #include "SortAndCalculate.hpp"
 #include "functions.hpp"
 #include "sha/hl_sha256wrapper.h"
@@ -130,7 +131,153 @@ void printMainMenu() {
 }
 
 void BuyerOptions() {
-  cout << "Buyer Options Input Page" << endl; //Placeholder
+  //IF THE USER IF A BUYER CASE
+	double varEstPurchase;
+	double varExchangeRate;
+	int count = 0;
+
+	while (count == 0) {
+		std::cout << "You have chosen to be a Buyer, Please fill out below" << std::endl << "Enter your Estimated purchase cost $(1.00 - 40.00): ";
+		std::cin >> varEstPurchase;
+		if (std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore(1000, '\n');
+		}
+		while (varEstPurchase < 1.00 || varEstPurchase > 40.00) {
+			std::cout << "Invalid input, Please enter your Estimated Purchase Cost $(1.00-40.00): ";
+			std::cin >> varEstPurchase;
+			if (std::cin.fail()) {
+				std::cin.clear();
+				std::cin.ignore(1000, '\n');
+			}
+		}
+
+
+		std::cout << std::endl << "Enter your Exchange rate (0.55-.99) ";
+		std::cin >> varExchangeRate;
+		if (std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore(1000, '\n');
+		}
+		while (varExchangeRate < .55 || varExchangeRate > .99) {
+			std::cout << "Invalid input, Please Enter Your Exchange Rate: ";
+			std::cin >> varExchangeRate;
+			if (std::cin.fail()) {
+				std::cin.clear();
+				std::cin.ignore(1000, '\n');
+			}
+		}
+
+		int staller = 0;
+		std::string decision;
+		std::string decision2;
+		while (staller == 0) {
+			std::cout << "You have chosen to search for $" << varEstPurchase << " at an exchange rate of " << varExchangeRate << std::endl;
+			std::cout << "Do you accept (Y/N)? ";
+			std::cin >> decision;
+			if (std::cin.fail()) {
+				std::cin.clear();
+				std::cin.ignore(1000, '\n');
+			}
+			if (decision == "Y" || decision == "y") {
+				staller = 1;
+				count = 1;
+			}
+			else if (decision == "N" || decision == "n") {
+				int holder = 0;
+				while (holder == 0) {
+					std::cout << "Would you like to change your preferences (Y/N)? (N goes back to main menu) ";
+					std::cin >> decision2;
+					if (std::cin.fail()) {
+						std::cin.clear();
+						std::cin.ignore(1000, '\n');
+					}
+					if (decision2 == "Y" || decision2 == "y") {
+						holder = 1;
+						staller = 1;
+						count == 0;
+					}
+					else if (decision2 == "N" || decision2 == "n") {
+						holder = 1;
+						staller = 1;
+						count = 1;
+						//some other var = 1 so that it goes back to main menu
+					}
+					else {	//error holder loop
+						std::cout << "Invalid choice, Please try again." << std::endl;
+					}
+				}
+			}
+			else {	//error staller while loop
+				std::cout << "Invalid choice, Please try again." << std::endl;
+
+			}
+
+		}	//end of staller while loop
+
+	}	//end of count while loop
+
+
+	std::cout << "Processing..." << std::endl;
+
+	//Pass to buyer class to find best person (lowest exchange rate, meets sellers min purchase requirement)
+
+
+	Buyer *user = new Buyer(varEstPurchase, varExchangeRate);
+	std::vector<Seller*> sellerlist;
+	Random::createSellerPop(sellerlist);
+	SortAndCalculate *sellercompute = new SortAndCalculate(user, sellerlist);
+
+
+	if(sellercompute->avaliableSellerCheck())
+	{
+		bool tr = false;
+		char Y_N;
+		sellercompute->buyerFlow();
+
+		Seller *selectedSeller=sellercompute->getSelectedSeller();
+		std::cout<<"Seller: "<<selectedSeller->getName()<<" has exchange rate: "<<selectedSeller->getExchangeRate()<<std::endl;
+		std::cout<<"Would you like to trade with "<<selectedSeller->getName()<<" Y/N"<<std::endl;
+		cin >> Y_N;
+
+
+		do
+		{
+			if(Y_N == 'Y' || Y_N == 'y')
+			{
+				//pass users estpurchase sellers exchange rate and sellers name
+				cout << "Transaction successfully completed!" << endl;
+        Transaction t (selectedSeller->getName(), selectedSeller->getExchangeRate(), user->getEstPurchase());
+        sys.getLoggedInUser().addTransaction(t);
+        sys.save();
+				// setName(selectedSeller->getName());
+				// setExchangeRate(selectedSeller->getExchangeRate());
+				// setPurchase(user->getEstPurchase());
+			}
+
+			else if(Y_N == 'N' || Y_N == 'n')
+			{
+				cout << "Transaction Cancelled. Have a nice day!" << endl;
+			}
+
+			else
+			{
+				cout << "Error: Invalid Input" << endl;
+				tr = true;
+
+				std::cout<<"Seller: "<<selectedSeller->getName()<<" has exchange rate: "<<selectedSeller->getExchangeRate()<<std::endl;
+				std::cout<<"Would you like to trade with "<<selectedSeller->getName()<<" Y/N"<<std::endl;
+				cin >> Y_N;
+			}
+
+		}while(tr);
+
+	}
+
+	else
+	{
+		cout << "There is no match" << endl;
+	}
 }
 
 int main(int argc, const char * argv[]) {
@@ -160,6 +307,18 @@ int main(int argc, const char * argv[]) {
 
   sys.loadMap("res/Map", ',');
 
+  // if(sys.getLoggedInUser().getTransactionHistory().size() > 0) {
+  //   for(Transaction t: sys.getLoggedInUser().getTransactionHistory()) {
+  //     cout << t.getName() << endl;
+  //     cout << t.getExchangeRate() << endl;
+  //     cout << t.getPurchase() << endl;
+  //   }
+  // }
+
+  // Transaction t("name",2.2,4.4);
+  // sys.getLoggedInUser().addTransaction(t);
+  // sys.save();
+
   string error = "";
   int inp = 0;
 
@@ -187,16 +346,11 @@ int main(int argc, const char * argv[]) {
     switch(inp) {
       case 1:
         clear();
-        cout << "Seller Options Input Page" << endl; //Placeholder
+        BuyerOptions();
         error = "";
-        cin >> sbinp;
         break;
       case 2:
         clear();
-
-
-
-
         error = "";
         cin >> sbinp;
         break;

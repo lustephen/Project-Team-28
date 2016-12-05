@@ -12,11 +12,15 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <sstream>
+#include <vector>
 #include "Settings.hpp"
 #include "Person.hpp"
+#include "Transaction.hpp"
 
 class Account {
 private:
+    std::vector<Transaction> transactions;
     Settings settings;
     Person person;
 public:
@@ -29,11 +33,16 @@ public:
     void setSettings(Settings);
     std::string print();
     std::string titlePrint();
+    void addTransaction(Transaction t);
+    std::vector<Transaction> getTransactionHistory();
     // Insertion operator
   	friend std::ostream& operator<<(std::ostream& os, const Account& acc)
   	{
   		// write out individual members of s with an end of line between each one
   		os << acc.person << acc.settings;
+      for(Transaction t: acc.transactions) {
+        os << t;
+      }
   		return os;
   	}
 
@@ -42,6 +51,9 @@ public:
   	{
   		// read in individual members of s
   		is >> acc.person >> acc.settings;
+
+      std::copy(std::istream_iterator<Transaction>(is), std::istream_iterator<Transaction>(), std::back_inserter(acc.transactions));
+      
   		return is;
   	}
 };

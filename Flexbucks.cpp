@@ -23,15 +23,13 @@ Flexbucks::Flexbucks(bool debugMode) {
 bool Flexbucks::login(string user, string hPassword) {
     vector<string> lines;
 
-    ifstream ifs("accounts/" +user + ".fba");
+    ifstream ifs("accounts/" + user + ".fba");
 
     Account acc (user);
 
     // read the object back in
-    if(ifs >> acc)
-    {
-        this -> loggedInAcc = acc;
-    }
+    ifs >> acc;
+    this -> loggedInAcc = acc;
 
     functions::split(functions::readFile(USERS_FILE), '\n', lines);
 
@@ -74,7 +72,11 @@ bool Flexbucks::userExists(string user) {
 bool Flexbucks::save() {
     Account acc = this -> loggedInAcc;
 
+    cout << "SAVE NAME:" << this->loggedInAcc << endl;
+
 	  ofstream ofs("accounts/" + acc.getPerson().getName() + ".fba");
+
+    cout << "NAME=" << acc.getPerson().getName() << endl;
 
     if(ofs << acc) {
       ofs.close();

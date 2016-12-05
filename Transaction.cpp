@@ -1,5 +1,15 @@
 #include "Transaction.hpp"
 
+Transaction::Transaction(std::string n, double exchRate, double purch){
+  this -> name = n;
+  this -> exchangeRate = exchRate;
+  this -> purchase = purch;
+}
+
+Transaction::Transaction() {
+   
+}
+
 void Transaction::setName(std::string n)
 {
     name = n;
