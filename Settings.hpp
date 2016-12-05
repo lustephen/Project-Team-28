@@ -8,20 +8,20 @@ class Settings
 {
 	private:
 		double exchangerate;
-		double minprofit;
+		double minpurchase;
 
 	public:
 		void setExchangeRate(double exchange);
-		void setMinProfit(double minprof);
+		void setMinPurchase(double minpurch);
 
 		double getExchangeRate();
-		double getMinProfit();
+		double getMinPurchase();
 
 		friend std::ostream& operator<<(std::ostream& os, const Settings& set)
   	{
   		// write out individual members of s with an end of line between each one
   		os << set.exchangerate << '\n';
-  		os << set.minprofit << '\n';
+  		os << set.minpurchase << '\n';
   		return os;
   	}
 
@@ -29,7 +29,7 @@ class Settings
   	friend std::istream& operator>>(std::istream& is, Settings& set)
   	{
   		// read in individual members of s
-  		is >> set.exchangerate >> set.minprofit;
+  		is >> set.exchangerate >> set.minpurchase;
   		return is;
   	}
 };
