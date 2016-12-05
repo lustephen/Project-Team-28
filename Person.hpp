@@ -6,9 +6,11 @@
 #include <string>
 #include <vector>
 #include <ctime>
-
+	
+//Creation of Person Object
 class Person
 {
+//Name, Gender, UFID self explanatory, month day and year are used to make the date of birth
 private:
 	std::string name;
 	int month;
@@ -18,9 +20,12 @@ private:
 	std::string ufid;
 
 public:
+	//This constructor is for the random population that needs to be passed to Person class
 	Person(std::string, int, int, int, char, std::string);
+	//This constructor is for the user to fill our the profile
 	Person(std::string, std::string, char, std::string);
 	Person(std::string);
+	//Default constructor to allow subclasses to make constructors that do not pass to Person class
 	Person();
 	std::string getName();
 	void setName(std::string);
@@ -56,7 +61,8 @@ public:
 };
 
 
-//random methods just here to generate the random Pop later
+//random methods just here to generate the random Population later
+//Rewritten in the Random class and explained there
 static int randMonth() {
 	return (rand() % 12 + 1);
 }
