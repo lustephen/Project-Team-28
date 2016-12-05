@@ -60,5 +60,5 @@ string Account::print() {
 
 string Account::titlePrint() {
   string separator = ", ";
-  return "Name: " + person.getName() + separator + "DOB: " + person.getDOB() + separator + "UFID: " + person.getID() + separator + "G: " + person.getGender() + separator + "Exchange Rate:" + to_string(settings.getExchangeRate()) + separator + "Min Profit: " + to_string(settings.getMinProfit()) + "\n";
+  return "Name: " + person.getName() + separator + "DOB: " + person.getDOB() + separator + "UFID: " + person.getID() + separator + "G: " + person.getGender() + separator + "Exchange Rate:" + to_string(settings.getExchangeRate()) + separator + "Min Profit: " + to_string(settings.getMinPurchase()) + "\n";
 }

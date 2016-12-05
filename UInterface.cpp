@@ -363,7 +363,7 @@ int main(int argc, const char * argv[]) {
         sys.getLoggedInUser().getSettings().setExchangeRate(stod(sbinp.c_str()));
         cout << "\nInput min profit: ";
         cin >> sbinp;
-        sys.getLoggedInUser().getSettings().setMinProfit(stod(sbinp.c_str()));
+        sys.getLoggedInUser().getSettings().setMinPurchase(stod(sbinp.c_str()));
         sys.save();
         break;
       case 4:
