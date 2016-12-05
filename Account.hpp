@@ -14,6 +14,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <iterator>
 #include "Settings.hpp"
 #include "Person.hpp"
 #include "Transaction.hpp"

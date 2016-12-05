@@ -1,7 +1,7 @@
 #include<iostream>
 #include<vector>
 #include"Buyer.hpp"
-#include"person.hpp"
+#include"Person.hpp"
 
 using namespace std;
 

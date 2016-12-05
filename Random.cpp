@@ -6,6 +6,8 @@
 #include "Buyer.hpp"
 #include "Seller.hpp"
 
+using namespace std;
+
 int Random::randMonth() {
 	return (rand() % 12 + 1);
 }
@@ -73,7 +75,8 @@ std::string Random::randUfid() {
 	return to_string(rand() % 90000000 + 10000000);
 }
 
-void Random::createBuyerPop(std::vector<Buyer*> vec) {
+vector<Buyer*> Random::createBuyerPop() {
+	vector<Buyer*> vec;
 	for (int g = 0; g < 20; g++) {
 		int a = randMonth();
 		char b = randGender();
@@ -81,13 +84,16 @@ void Random::createBuyerPop(std::vector<Buyer*> vec) {
 		vec.push_back(buy);
 
 	}
+	return vec;
 }
 
-void Random::createSellerPop(std::vector<Seller*> vec) {
+vector<Seller*> Random::createSellerPop() {
+	vector<Seller*> vec;
 	for (int h = 0; h < 20; h++) {
 		int j = randMonth();
 		char z = randGender();
 		Seller *sell = new Seller(randMinPurchase(), randExRate(), randMonth(), randDay(j), randYear(), randName(z), z, randUfid());
 		vec.push_back(sell);
 	}
+	return vec;
 }

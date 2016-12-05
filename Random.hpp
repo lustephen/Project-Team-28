@@ -20,8 +20,8 @@ class Random{
   static double randMinPurchase();
   static string randName(char);
   static string randUfid();
-  static void createBuyerPop(vector<Buyer*>);
-  static void createSellerPop(vector<Seller*>);
+  static vector<Buyer*> createBuyerPop();
+  static vector<Seller*> createSellerPop();
 };
 
   #endif
