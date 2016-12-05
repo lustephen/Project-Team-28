@@ -522,9 +522,17 @@ int main(int argc, const char * argv[]) {
 	  //Prints Flexbucks greeting screen
     printGreetingScreen();
     cout << sys.getLoggedInUser().titlePrint();
+<<<<<<< HEAD
 	//Prints map for visual aid
     cout << sys.printMap();
 	//Prints out main menu for user to select an option
+=======
+		
+		cout <<
+    cout << sys.printMap();
+    cout << "\nReitz Union Food Court Map\nKey: P = Panda Express, C = Croutons, J = Papa John's\nW = Wendy's, S = Starbucks, T = Pollo Tropical, x = Wall\n\n";
+
+>>>>>>> origin/master
     printMainMenu();
 
     cout << error;
