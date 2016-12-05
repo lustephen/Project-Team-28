@@ -1,17 +1,17 @@
-b,b,b,b,b,b,b,b,b,b,b,b,b,b
-b,b,b,b,b,b,x,x,x,b,b,b,b,b
-b,b,b,b,b,b,b,b,b,b,b,b,b,b
-b,x,x,x,x,b,b,b,b,x,x,x,x,x
-b,x,x,x,x,b,b,b,x,x,x,x,x,x
-b,x,x,x,b,b,b,x,x,x,x,x,x,x
-b,x,x,x,b,b,b,x,x,x,x,x,x,x
-b,x,x,b,b,b,b,x,x,x,x,x,x,x
-b,b,b,b,b,b,b,x,x,x,x,x,x,x
-b,b,b,b,b,b,x,x,x,x,x,x,x,x
-x,x,x,b,b,b,x,x,x,x,x,x,x,x
-x,x,x,b,b,b,x,x,x,x,x,x,x,x
-x,x,x,b,b,b,x,x,x,x,x,x,x,x
-x,b,b,b,b,b,x,x,x,x,x,x,x,x
+x,x,x,x,x,x,x,x,x,x,x,x,x,x
+x, , , , , , , , , , , , ,x
+x, , , , , , , , , , , , ,x
+x, ,x,x,x,W, , , , ,x,x,x,x
+x, ,x,x,x,W, , , ,x,x,x,x,x
+x, ,P,x,J, , , , ,x,x, , , 
+x, ,P,x,J, , , ,x,x,x, , , 
+x, ,C,C, , , ,x,x,x, , , , 
+x, , , , , , ,x,x, , , , , 
+x, , , , , ,x,x,x, , , , , 
+x,S,S, , , ,x,x, , , , , , 
+x,x,T, , , ,x,x, , , , , , 
+x,x,T, , , ,x,x, , , , , , 
+x, , , , , ,x,x, , , , , , 
 
 #   ^
 #   |
