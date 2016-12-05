@@ -13,25 +13,11 @@ Buyer::Buyer(double est, double ex, int mm, int dd, int yr, string n, char u, st
 }
 Buyer::Buyer(double est, double ex)
 {
-	//for (int i = 0; i < locationCoordinateSize; i++)
-		//location[i] = l[i];
 	estPurchase = est;
-	//maxDist = max;
 	exRate = ex;
 	Person();
 }
 
-/*
-int* Buyer::getLocation()
-{
-	return location;
-}
-
-double Buyer::getMaxDist()
-{
-	return maxDist;
-}
-*/
 double Buyer::getEstPurchase()
 {
 	return estPurchase;
@@ -41,19 +27,4 @@ double Buyer::getExchangeRate()
 {
 	return exRate;
 }
-/*
-int Buyer::getLocationCoordinateSize()
-{
-	return locationCoordinateSize;
-}
 
-void Buyer::setDistanceToSeller(double dist)
-{
-	distanceToSeller = dist;
-}
-
-double Buyer::getDistanceToSeller()
-{
-	return distanceToSeller;
-}
-*/
