@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <string>
 #include <sstream>
+#include <ctime>
 #include "Flexbucks.hpp"
 #include "Buyer.hpp"
 #include "Seller.hpp"
@@ -442,6 +443,8 @@ void SellerOptions()
 }
 
 int main(int argc, const char * argv[]) {
+  srand(time(NULL));
+
   clear();
 
   bool loggedIn = false;
@@ -516,7 +519,6 @@ int main(int argc, const char * argv[]) {
         clear();
         SellerOptions();
         error = "";
-        cin >> sbinp;
         break;
       case 3:
         clear();
