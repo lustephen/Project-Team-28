@@ -527,7 +527,7 @@ int main(int argc, const char * argv[]) {
           cout << "\tPurchased: " << t.getPurchase() << endl;
           count++;
         }
-        cout << "\nEnter m to return to the (m)enu: "
+        cout << "\nEnter m to return to the (m)enu: ";
         cin >> dummy;
         break;
       case 4:
