@@ -24,7 +24,7 @@ void SortAndCalculate::buyerFlow()
 
 void SortAndCalculate::sellerFlow()
 {
-
+	//Sorts the buyer list and stores the sorted buyerlist into sorted buyerlist
 	sortBuyerList();
 }
 /*
@@ -57,37 +57,7 @@ bool SortAndCalculate::avaliableSellerCheck()
 		return false;
 	return true;
 }
-/*
-void SortAndCalculate::calculateDistanceToBuyer()
-{
-	double temp = 0;
 
-	for (unsigned int j = 0; j < sellerList.size(); j++)
-	{
-		for (unsigned int i = 0; i < buyer->getLocationCoordinateSize(); i++)
-		{
-			temp += pow(std::abs(sellerList[j]->getLocation()[i] - buyer->getLocation()[i]), 2);
-		}
-		sellerList[j]->setDistanceToBuyer(temp);
-		temp = 0;
-	}
-}
-
-void SortAndCalculate::calculateDistanceToSeller()
-{
-	double temp = 0;
-
-	for (unsigned int j = 0; j < buyerList.size(); j++)
-	{
-		for (unsigned int i = 0; i < seller->getLocationCoordinateSize(); i++)
-		{
-			temp += pow(std::abs(buyerList[j]->getLocation()[i] - seller->getLocation()[i]), 2);
-		}
-		buyerList[j]->setDistanceToSeller(temp);
-		temp = 0;
-	}
-}
-*/
 
 /*
 Removes the sellers whose requirements do not match the buyers
