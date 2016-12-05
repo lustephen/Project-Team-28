@@ -5,9 +5,9 @@ void Settings::setExchangeRate(double exchange)
 	exchangerate = exchange;
 }
 
-void Settings::setMinProfit(double minprof)
+void Settings::setMinPurchase(double minpurch)
 {
-	minprofit = minprof;
+	minpurchase = minpurch;
 }
 
 double Settings::getExchangeRate()
@@ -15,7 +15,7 @@ double Settings::getExchangeRate()
 	return exchangerate;
 }
 
-double Settings::getMinProfit()
+double Settings::getMinPurchase()
 {
-	return minprofit;
+	return minpurchase;
 }
