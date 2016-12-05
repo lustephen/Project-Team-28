@@ -38,7 +38,7 @@ returns false
 bool SortAndCalculate::avaliableBuyerCheck()
 {
 	removeOutOfRangeValuesForBuyerList();
-	if (sellerList.size() == 0)
+	if (buyerList.size() == 0)
 		return false;
 	return true;
 }
