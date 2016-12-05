@@ -276,7 +276,9 @@ void BuyerOptions() {
 
 	else
 	{
-		cout << "There is no match" << endl;
+		cout << "There is no match, return any key to exit" << endl;
+		string temp;
+		cin >> temp;
 	}
 }
 
@@ -433,7 +435,9 @@ void SellerOptions()
 
 	else
 	{
-		cout << "There is no match" << endl;
+		cout << "There is no match, return any key to exit" << endl;
+		string temp;
+		cin >> temp;
 	}
 }
 
