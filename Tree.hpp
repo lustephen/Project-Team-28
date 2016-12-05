@@ -29,7 +29,6 @@ private:
 public:
 	node* root;
 	tree();
-	//node* getRoot();
 	void addLeaf(double data, Buyer* b);
 	void addLeaf(double data, Seller* s);
 	void inOrderBuyerList(node* n);
