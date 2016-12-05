@@ -3,13 +3,13 @@
 #include "SortAndCalculate.hpp"
 
 using namespace std;
-
+//Constructor for if the user is a buyer, passes the user Buyer info and a randomly generated Seller population vector
 SortAndCalculate::SortAndCalculate(Buyer *b, vector<Seller*> s)
 {
 	buyer = b;
 	sellerList = s;
 }
-
+//Constructor for if the user is a seller, passes the user Seller info and a randomly generated Buyer population vector
 SortAndCalculate::SortAndCalculate(Seller *s, vector<Buyer*> b)
 {
 	seller = s;
@@ -111,6 +111,7 @@ void SortAndCalculate::sortSellerList()
 	for (unsigned int i = 0; i < sellerList.size(); i++)
 		elm->addLeaf(sellerList[i]->getExchangeRate(), sellerList[i]);
 	/*
+	Code saved for troubleshooting purposes
 	if(distance )
 	for (unsigned int i = 0; i < sellerList.size(); i++)
 		elm->addLeaf(sellerList[i]->getDistanceToBuyer(), sellerList[i]);

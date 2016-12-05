@@ -16,7 +16,7 @@
 using namespace std;
 
 #endif /* functions_hpp */
-
+//Class functions used to read .txt file where Account information will be stored
 class functions {
 public:
     static string readFile(string);

@@ -19,7 +19,7 @@ string USERS_FILE = "res/users.txt";
 Flexbucks::Flexbucks(bool debugMode) {
     this -> debugMode = debugMode;
 }
-
+//Function to login into Account and the Program in general
 bool Flexbucks::login(string user, string hPassword) {
     vector<string> lines;
 
@@ -30,9 +30,9 @@ bool Flexbucks::login(string user, string hPassword) {
     // read the object back in
     ifs >> acc;
     this -> loggedInAcc = acc;
-
+	//Reads .txt file to see if Account username and password exists
     functions::split(functions::readFile(USERS_FILE), '\n', lines);
-
+	//Returns true if account exists or false if account does not exist
     for(string i: lines) {
         vector<string> temp;
         functions::split(i,':',temp);
@@ -43,7 +43,8 @@ bool Flexbucks::login(string user, string hPassword) {
 
     return false;
 }
-
+//If Account exists return true if Account does not exist returns false
+//Function reads .txt file to see if user account was saved
 bool Flexbucks::userExists(string user) {
     fstream myfile;
     string file_str;
@@ -68,7 +69,7 @@ bool Flexbucks::userExists(string user) {
     return found_user;
 
 }
-
+//Function to save all information into currently logged in account
 bool Flexbucks::save() {
     Account acc = this -> loggedInAcc;
 
@@ -87,7 +88,7 @@ bool Flexbucks::save() {
 
     return false;
 }
-
+//Function to create a new Account for the user
 bool Flexbucks::createUser(string user, string hPassword, Account acc = Account()) {
     if(userExists(user)) {
         return false;
@@ -100,7 +101,7 @@ bool Flexbucks::createUser(string user, string hPassword, Account acc = Account(
     ofs << acc;
 
     ofs.close();
-
+	//Saves users account password and username into a .txt file
     fstream myfile;
     myfile.open (USERS_FILE, ios::out | ios::app);
     if (myfile.is_open()) {
@@ -114,13 +115,13 @@ bool Flexbucks::createUser(string user, string hPassword, Account acc = Account(
 
     return true;
 }
-
+//Helper Methods to create an Account for user
 bool Flexbucks::createUser(string user, string hPassword) {
   Account acc (user);
 
   return createUser(user,hPassword,acc);
 }
-
+//Function that removes a saved account from the .txt file
 bool Flexbucks::removeUser(string user) {
     fstream myfile;
     string file_str;
@@ -154,11 +155,11 @@ bool Flexbucks::removeUser(string user) {
 
     return found_user;
 }
-
+//Gets Accounted information
 Account& Flexbucks::getLoggedInUser() {
   return this -> loggedInAcc;
-}
 
+//Returns string (to be printed out) which is a layout of the Reitz Union 
 string Flexbucks::printMap() {
   string res = "";
   for(int i=0; i < this -> map.size(); i++) {
@@ -169,11 +170,11 @@ string Flexbucks::printMap() {
   }
   return res;
 }
-
+//Function to set the Reitz Union Map
 void Flexbucks::setMap(vector< vector<Account> > map) {
   this -> map = map;
 }
-
+//Loads map
 bool Flexbucks::loadMap(string filename, char sep) {
   fstream myfile;
   string line;
@@ -203,7 +204,7 @@ bool Flexbucks::loadMap(string filename, char sep) {
 bool Flexbucks::loadMap(string filename) {
   return loadMap(filename,' ');
 }
-
+//Adds Users location to map, May not be used
 bool Flexbucks::addToMap(Account user, int x, int y) {
   if(x > 0 && x < map.size() && y > 0 && y < map[x].size()) {
     this -> map[x][y] = user;

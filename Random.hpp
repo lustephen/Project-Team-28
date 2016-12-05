@@ -8,7 +8,7 @@
 #include "Seller.hpp"
 
 using namespace std;
-
+//Random class used to generate profiles for the random population
 class Random{
   public:
   static int randMonth();
@@ -20,6 +20,7 @@ class Random{
   static double randMinPurchase();
   static string randName(char);
   static string randUfid();
+  //Vectors filled with the random populations of buyers/sellers
   static vector<Buyer*> createBuyerPop();
   static vector<Seller*> createSellerPop();
 };

@@ -10,7 +10,7 @@
 #include <sstream>
 #include <vector>
 #include "functions.hpp"
-
+//Functions used to read the saved .txt file
 void functions::split(const string &s, char delim, vector<string> &elems) {
     stringstream ss;
     ss.str(s);
@@ -26,7 +26,7 @@ bool functions::is_number(const std::string& s)
     while (it != s.end() && std::isdigit(*it)) ++it;
     return !s.empty() && it == s.end();
 }
-
+//Opens the .txt file returns a line from the .txt file (string) then closes file
 string functions::readFile(string filename) {
     ifstream myfile;
     myfile.open (filename, ios::in);

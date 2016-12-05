@@ -22,7 +22,8 @@
 using namespace std;
 
 Flexbucks sys (true);
-
+//On Startup Menu Options for Program
+//User Can either Create a New accont that will be saved or Login to an Account
 int loginMenuOption() {
   string rawinp;
   int inp = 0;
@@ -35,13 +36,14 @@ int loginMenuOption() {
     std::cin.clear();
     cin >> rawinp;
     stringstream(rawinp) >> inp;
+	//Trouble Shooting incase user does not choose options 1 or 2
     if(inp < 1 || inp > 2) {
       cout << "Invalid input, please try again." << endl;
     }
   }
   return inp;
 }
-
+//Login Fuction to check username and password of the account
 bool login() {
   string user;
   string pass;
@@ -52,7 +54,7 @@ bool login() {
   hashwrapper *sha = new sha256wrapper();
   return sys.login(user,sha->getHashFromString(pass));
 }
-
+//Function for creating a new account, passes username and password to be saved in a .txt file
 bool createUser() {
   string user;
   string pass;
@@ -67,7 +69,7 @@ bool createUser() {
   cin >> pass;
   hashwrapper *sha = new sha256wrapper();
 
-  //Account creation
+  //Account creation, Profile is filled out as well then saved into a .txt file
   int slashes = 0;
   bool isNumbers = false;
   string dob = "";
@@ -97,7 +99,7 @@ bool createUser() {
 
   return sys.createUser(user,sha->getHashFromString(pass), acc);
 }
-
+//Clears the Command line window to keep program functioning smoothly
 void clear() {
   #ifdef OS_WINDOWS
     COORD topLeft  = { 0, 0 };
@@ -119,24 +121,26 @@ void clear() {
     std::cout << "\x1B[2J\x1B[H";
   #endif
 }
-
+//Function to print out Gretting screen of FlexBucks Market
 void printGreetingScreen() {
   cout << functions::readFile("res/welcomescreen.txt");
 }
-
+//Function to print out Main Menu after logging in
+//User can select to Buy/Sell, View their transaction history, or exit the program
 void printMainMenu() {
   cout << "  1) Buy" << endl;
   cout << "  2) Sell" << endl;
   cout << "  3) View Transaction History" << endl;
   cout << "  4) Exit" << endl;
 }
-
+//Function if the user wants to be a buyer, function used for simpler coding in the main
 void BuyerOptions() {
   //IF THE USER IF A BUYER CASE
+	//Variables Purcahse cost and Exchange rate are needed inputs from the user
 	double varEstPurchase;
 	double varExchangeRate;
 	int count = 0;
-
+	//Asks for Estimated Purchase cost and Troubleshoots for invalid inputs 
 	while (count == 0) {
 		std::cout << "You have chosen to be a Buyer, Please fill out below" << std::endl << "Enter your Estimated purchase cost $(1.00 - 40.00): ";
 		std::cin >> varEstPurchase;
@@ -144,6 +148,7 @@ void BuyerOptions() {
 			std::cin.clear();
 			std::cin.ignore(1000, '\n');
 		}
+		//Estimated purchase can only be between $1 and $40 inclusive
 		while (varEstPurchase < 1.00 || varEstPurchase > 40.00) {
 			std::cout << "Invalid input, Please enter your Estimated Purchase Cost $(1.00-40.00): ";
 			std::cin >> varEstPurchase;
@@ -153,7 +158,8 @@ void BuyerOptions() {
 			}
 		}
 
-
+		//Asks for exchange rate Troubleshoots for invalid inputs as well
+		//Exchange rate can only be in between .55-99 inclusive
 		std::cout << std::endl << "Enter your Exchange rate (0.55-.99) ";
 		std::cin >> varExchangeRate;
 		if (std::cin.fail()) {
@@ -168,7 +174,8 @@ void BuyerOptions() {
 				std::cin.ignore(1000, '\n');
 			}
 		}
-
+		//Validates that the user wants to buy x Amount for y Exchange rate
+		//Continues to trouble shoot if user does not input Y or N (y and n also)
 		int staller = 0;
 		std::string decision;
 		std::string decision2;
@@ -180,36 +187,40 @@ void BuyerOptions() {
 				std::cin.clear();
 				std::cin.ignore(1000, '\n');
 			}
+			//If user wants to continue breaks out of while loops 
 			if (decision == "Y" || decision == "y") {
 				staller = 1;
 				count = 1;
 			}
+			//If user declines, will be asked if they want to change their preferences
 			else if (decision == "N" || decision == "n") {
 				int holder = 0;
 				while (holder == 0) {
-					std::cout << "Would you like to change your preferences (Y/N)? (N goes back to main menu) ";
+					std::cout << "Would you like to change your preferences (Y/N)? (N continues with current settings) ";
 					std::cin >> decision2;
 					if (std::cin.fail()) {
 						std::cin.clear();
 						std::cin.ignore(1000, '\n');
 					}
+					//If user asks to change preferences then they will be taken back and asked for exchange rate, estimated purcahse etc...
 					if (decision2 == "Y" || decision2 == "y") {
 						holder = 1;
 						staller = 1;
 						count = 0;
 					}
+					//If users says no then program will look for seller based on the current preferences 
+					//Breaks out of while loops and continues program
 					else if (decision2 == "N" || decision2 == "n") {
 						holder = 1;
 						staller = 1;
 						count = 1;
-						//some other var = 1 so that it goes back to main menu
 					}
-					else {	//error holder loop
+					else {	//error for the holder while loop, checking if user does not select Y, N, y ,n
 						std::cout << "Invalid choice, Please try again." << std::endl;
 					}
 				}
 			}
-			else {	//error staller while loop
+			else {	//error staller while loop, same thing as holder loop
 				std::cout << "Invalid choice, Please try again." << std::endl;
 
 			}
@@ -220,22 +231,25 @@ void BuyerOptions() {
 
 
 	std::cout << "Processing..." << std::endl;
-
+	//If preferences are chosen,
 	//Pass to buyer class to find best person (lowest exchange rate, meets sellers min purchase requirement)
 
-
+	//Creates user as a buyer object with their preferences passed in parameters
 	Buyer *user = new Buyer(varEstPurchase, varExchangeRate);
 	std::vector<Seller*> sellerlist;
+	//Seller list is then filled with a random population of sellers
 	sellerlist = Random::createSellerPop();
+	//SortAndCalculate Object made passes the user and sellerlist
 	SortAndCalculate *sellercompute = new SortAndCalculate(user, sellerlist);
 
-
+	//Checks to see if there is anyone in seller list that meets requirements of the user, if no one matches return back to main menu
 	if(sellercompute->avaliableSellerCheck())
 	{
 		bool tr = false;
 		char Y_N;
+		//If there is a seller in seller list that matches requirements buyerFlow searches for optimal Seller (lowest exchange rate)
 		sellercompute->buyerFlow();
-
+		//Selected Seller is found and user will be asked if he/she wants to trade with the selected seller
 		Seller *selectedSeller=sellercompute->getSelectedSeller();
 		std::cout<<"Seller: "<<selectedSeller->getName()<<" has exchange rate: "<<selectedSeller->getExchangeRate()<<std::endl;
 		std::cout<<"Would you like to trade with "<<selectedSeller->getName()<<" Y/N"<<std::endl;
@@ -246,21 +260,23 @@ void BuyerOptions() {
 		{
 			if(Y_N == 'Y' || Y_N == 'y')
 			{
-				//pass users estpurchase sellers exchange rate and sellers name
+				//if User goes through transaction the Name exchange rate of seller and the purcahse cost of user is stored in tranaction object 
 				cout << "Transaction successfully completed!" << endl;
         Transaction t (selectedSeller->getName(), selectedSeller->getExchangeRate(), user->getEstPurchase());
         sys.getLoggedInUser().addTransaction(t);
+		//saves transaction to .txt file
         sys.save();
+				//functions that are used to pass to transaction 
 				// setName(selectedSeller->getName());
 				// setExchangeRate(selectedSeller->getExchangeRate());
 				// setPurchase(user->getEstPurchase());
 			}
-
+			//If user does not go through transaction returns back to main menu
 			else if(Y_N == 'N' || Y_N == 'n')
 			{
 				cout << "Transaction Cancelled. Have a nice day!" << endl;
 			}
-
+			//Trouble shooting error if user does not select Y,N,y,n
 			else
 			{
 				cout << "Error: Invalid Input" << endl;
@@ -274,7 +290,7 @@ void BuyerOptions() {
 		}while(tr);
 
 	}
-
+	//As stated above, if no seller in list meets requirements return to main menu
 	else
 	{
 		cout << "There is no match, return any key to exit" << endl;
@@ -282,13 +298,14 @@ void BuyerOptions() {
 		cin >> temp;
 	}
 }
-
+//Function for if the user wants to be a seller, function used for simpler coding in the main
 void SellerOptions()
 {
+	//The user Sellers stores a exchange rate and minimum purchase variables
   double varMinPurchase;
 	double varExchangeRate2;
 	int scount = 0;
-
+	//Asks for Minimum purchase cost
 	while (scount == 0) {
 		std::cout << "You have chosen to be a Seller, Please fill out below" << std::endl << "Enter your Minimum Purchase cost $(1.00 - 40.00): ";
 		std::cin >> varMinPurchase;
@@ -296,6 +313,8 @@ void SellerOptions()
 			std::cin.clear();
 			std::cin.ignore(1000, '\n');
 		}
+		//Users minimum purchase cost has to be between $1 and $40 inclusive
+		//Trouble shooting errors if not in between 1-40
 		while (varMinPurchase < 1.00 || varMinPurchase > 40.00) {
 			std::cout << "Invalid input, Please enter your Minimum Purchase Cost $(1.00-40.00): ";
 			std::cin >> varMinPurchase;
@@ -305,7 +324,8 @@ void SellerOptions()
 			}
 		}
 
-
+		//Asks for exchange rate
+		//Exchange rate checked to see if between .55-.99 inclusive
 		std::cout << std::endl << "Enter your Exchange rate (0.55-.99) ";
 		std::cin >> varExchangeRate2;
 		if (std::cin.fail()) {
@@ -320,7 +340,7 @@ void SellerOptions()
 				std::cin.ignore(1000, '\n');
 			}
 		}
-
+		//Asks user to verify their search for their minimum purchae and exchange rate
 		int sstaller = 0;
 		std::string sdecision;
 		std::string sdecision2;
@@ -332,36 +352,41 @@ void SellerOptions()
 				std::cin.clear();
 				std::cin.ignore(1000, '\n');
 			}
+			//If user accepts it will exit while loops and continue program
 			if (sdecision == "Y" || sdecision == "y") {
 				sstaller = 1;
 				scount = 1;
 			}
+			//If user rejects they will be asked if he/she wants to change preferences
 			else if (sdecision == "N" || sdecision == "n") {
 				int sholder = 0;
 				while (sholder == 0) {
-					std::cout << "Would you like to change your preferences (Y/N)? (N goes back to main menu) ";
+					std::cout << "Would you like to change your preferences (Y/N)? (N continues with current settings) ";
 					std::cin >> sdecision2;
 					if (std::cin.fail()) {
 						std::cin.clear();
 						std::cin.ignore(1000, '\n');
 					}
+					//If user wants to change setting will be taken back to be asked for minimum purchase
 					if (sdecision2 == "Y" || sdecision2 == "y") {
 						sholder = 1;
 						sstaller = 1;
 						scount = 0;
 					}
+					//If user rejects will, program will continue with the preferences that they filled out already
+					//breaks out of while loop to continue program
 					else if (sdecision2 == "N" || sdecision2 == "n") {
 						sholder = 1;
 						sstaller = 1;
 						scount = 1;
-						//some other var = 1 so that it goes back to main menu
+					
 					}
-					else {	//error sholder loop
+					else {	//error sholder loop, trouble shoot for user input errors
 						std::cout << "Invalid choice, Please try again." << std::endl;
 					}
 				}
 			}
-			else {	//error sstaller while loop
+			else {	//error sstaller while loop, trouble shoot for user input errors
 				std::cout << "Invalid choice, Please try again." << std::endl;
 
 			}
@@ -369,23 +394,26 @@ void SellerOptions()
 		}	//end of sstaller while loop
 
 	}	//end of scount while loop
+		//If Seller variables are set will continue program
+		//Pass to seller class to find best Buyer (highest exchange rate and meets min purchase requirement)
 
-		//Pass to seller lass to find best person (highest exchange rate and meets min purchase requirement)
-
-
+		//Creates the user as a Seller object
 		Seller *user2 = new Seller(varMinPurchase, varExchangeRate2);
 		std::vector<Buyer*> buyerlist;
+		//Fills buyerlist with population of random buyers
 		buyerlist = Random::createBuyerPop();
+		//Passes the seller user and buyer list
 		SortAndCalculate *buyercompute = new SortAndCalculate(user2, buyerlist);
 
-			if(buyercompute->avaliableBuyerCheck())
-	{
+		//checks to see if anyone in buyerlist meets the requirements of user, if not then there is no match, back to main menu
+		if(buyercompute->avaliableBuyerCheck())
+		{
 		bool fl = false;
 		char Y_N;
-
+		//If one person matches then sellerFlow finds the optimal buyer
 		buyercompute->sellerFlow();
 
-
+		//Selected buyers info shown and asks the user to verify transaction
 		Buyer *selectedBuyer=buyercompute->getSelectedBuyer();
 
 		std::cout<<"Buyer: "<<selectedBuyer->getName()<<" has exchange rate: "<<selectedBuyer->getExchangeRate()
@@ -399,18 +427,19 @@ void SellerOptions()
 
 		do
 		{
+			//If user accepts transaction it is comepleted and goes bac to main menu
 			if(Y_N == 'Y' || Y_N == 'y')
 			{
 				//pass buyers' name, exchange rate, and estimated purchase.
 				cout << "Transaction successfully completed!" << endl;
-
+				//function that are used to pass to transaction
 				//setName(user2->getName());
 				//setExchangeRate(user2->getExchangeRate());
 				//setPurchase(user2->getEstPurchase());
 
 				break;
 			}
-
+			//If user rejects transaction returns to main menu
 			else if(Y_N == 'N' || Y_N == 'n')
 			{
 				cout << "Transaction cancelled. Have a nice day!" << endl;
@@ -433,7 +462,7 @@ void SellerOptions()
 		}while(fl);
 
 	}
-
+	//if no one in buyer list meets requirements returns to main menu
 	else
 	{
 		cout << "There is no match, return any key to exit" << endl;
@@ -443,20 +472,23 @@ void SellerOptions()
 }
 
 int main(int argc, const char * argv[]) {
+	//Seeds rand() so it creates random variables every time
   srand(time(NULL));
-
+  //clears command line
   clear();
-
+  //If login information is false
   bool loggedIn = false;
   string temp;
   while(!loggedIn) {
     int inp = loginMenuOption();
+	//If user wants to login, username and password is asked and passed to login
     if(inp == 1) {
       loggedIn = login();
       if(!loggedIn) {
         cout << "Username or password is incorrect!" << endl;
       }
     }
+	//If ser wants to create and account createUser function is called and asks for username and password
     else if(inp == 2) {
      loggedIn = createUser();
      if(!loggedIn) {
@@ -487,11 +519,12 @@ int main(int argc, const char * argv[]) {
   int inp = 0;
 
   while(inp != 4) { //Main ui loop
+	  //Prints Flexbucks greeting screen
     printGreetingScreen();
     cout << sys.getLoggedInUser().titlePrint();
-
+	//Prints map for visual aid
     cout << sys.printMap();
-
+	//Prints out main menu for user to select an option
     printMainMenu();
 
     cout << error;
@@ -508,19 +541,22 @@ int main(int argc, const char * argv[]) {
     string sbinp;
     int count = 1;
     std::string dummy;
-
+	//Cases for each case that the user can select from the main menu
     switch(inp) {
+		//If user is Buyer
       case 1:
         clear();
         BuyerOptions();
         error = "";
         break;
       case 2:
+		  //If user is Seller
         clear();
         SellerOptions();
         error = "";
         break;
       case 3:
+		  //If user wants to see transaction history, reads .txt file and displays transaction history
         clear();
         for(Transaction t: sys.getLoggedInUser().getTransactionHistory()) {
           cout << "Transaction: " << count << endl;
@@ -532,6 +568,7 @@ int main(int argc, const char * argv[]) {
         cout << "\nEnter m to return to the (m)enu: ";
         cin >> dummy;
         break;
+		//Exits program case
       case 4:
         ;
         break;

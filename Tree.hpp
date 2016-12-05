@@ -4,7 +4,7 @@
 #include "Buyer.hpp"
 #include "Seller.hpp"
 #include <vector>
-
+//Tree used to sort Seller and Buyer Vectors using nodes (Binary Tree)
 class tree
 {
 private:

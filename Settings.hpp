@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-
+//Settings classed used to save exchange rate and minimum purchase cost for each account, May not be used
 class Settings
 {
 	private:

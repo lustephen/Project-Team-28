@@ -18,22 +18,29 @@
 #include "Settings.hpp"
 #include "Person.hpp"
 #include "Transaction.hpp"
-
+//Account classed used to keep track of users login info, users profile, and users transaction history
 class Account {
 private:
+	//Holds Transaction list (vector) and Person info, holds settings as well but settings may not be used
     std::vector<Transaction> transactions;
     Settings settings;
     Person person;
 public:
+	//Overloaded constructors used to save profile information
     Account(std::string,std::string,char,std::string);
     Account(std::string);
+	//Default Account Constructor
     Account();
+	//Functions to get and set Person Profile information
     Person& getPerson();
     void setPerson(Person);
+	//Functions to get and set Settings information, Settings may not be used
     Settings& getSettings();
     void setSettings(Settings);
+	//Returns person profile information
     std::string print();
     std::string titlePrint();
+	//Function used to add transaction to account
     void addTransaction(Transaction t);
     std::vector<Transaction> getTransactionHistory();
     // Insertion operator
