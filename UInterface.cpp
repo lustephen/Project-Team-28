@@ -280,6 +280,163 @@ void BuyerOptions() {
 	}
 }
 
+void SellerOptions()
+{
+  double varMinPurchase;
+	double varExchangeRate2;
+	int scount = 0;
+
+	while (scount == 0) {
+		std::cout << "You have chosen to be a Seller, Please fill out below" << std::endl << "Enter your Minimum Purchase cost $(1.00 - 40.00): ";
+		std::cin >> varMinPurchase;
+		if (std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore(1000, '\n');
+		}
+		while (varMinPurchase < 1.00 || varMinPurchase > 40.00) {
+			std::cout << "Invalid input, Please enter your Minimum Purchase Cost $(1.00-40.00): ";
+			std::cin >> varMinPurchase;
+			if (std::cin.fail()) {
+				std::cin.clear();
+				std::cin.ignore(1000, '\n');
+			}
+		}
+
+
+		std::cout << std::endl << "Enter your Exchange rate (0.55-.99) ";
+		std::cin >> varExchangeRate2;
+		if (std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore(1000, '\n');
+		}
+		while (varExchangeRate2 < .55 || varExchangeRate2 > .99) {
+			std::cout << "Invalid input, Please Enter Your Exchange Rate: ";
+			std::cin >> varExchangeRate2;
+			if (std::cin.fail()) {
+				std::cin.clear();
+				std::cin.ignore(1000, '\n');
+			}
+		}
+
+		int sstaller = 0;
+		std::string sdecision;
+		std::string sdecision2;
+		while (sstaller == 0) {
+			std::cout << "You have chosen to search for a Minimum Purchase of $" << varMinPurchase << " at an exchange rate of " << varExchangeRate2 << std::endl;
+			std::cout << "Do you accept (Y/N)? ";
+			std::cin >> sdecision;
+			if (std::cin.fail()) {
+				std::cin.clear();
+				std::cin.ignore(1000, '\n');
+			}
+			if (sdecision == "Y" || sdecision == "y") {
+				sstaller = 1;
+				scount = 1;
+			}
+			else if (sdecision == "N" || sdecision == "n") {
+				int sholder = 0;
+				while (sholder == 0) {
+					std::cout << "Would you like to change your preferences (Y/N)? (N goes back to main menu) ";
+					std::cin >> sdecision2;
+					if (std::cin.fail()) {
+						std::cin.clear();
+						std::cin.ignore(1000, '\n');
+					}
+					if (sdecision2 == "Y" || sdecision2 == "y") {
+						sholder = 1;
+						sstaller = 1;
+						scount == 0;
+					}
+					else if (sdecision2 == "N" || sdecision2 == "n") {
+						sholder = 1;
+						sstaller = 1;
+						scount = 1;
+						//some other var = 1 so that it goes back to main menu
+					}
+					else {	//error sholder loop
+						std::cout << "Invalid choice, Please try again." << std::endl;
+					}
+				}
+			}
+			else {	//error sstaller while loop
+				std::cout << "Invalid choice, Please try again." << std::endl;
+
+			}
+
+		}	//end of sstaller while loop
+
+	}	//end of scount while loop
+
+		//Pass to seller lass to find best person (highest exchange rate and meets min purchase requirement)
+
+		
+		Seller *user2 = new Seller(varMinPurchase, varExchangeRate2);
+		std::vector<Buyer*> buyerlist;
+		buyerlist = Random::createBuyerPop();
+		SortAndCalculate *buyercompute = new SortAndCalculate(user2, buyerlist);
+		
+			if(buyercompute->avaliableBuyerCheck())
+	{
+		bool fl = false;
+		char Y_N;
+		
+		buyercompute->sellerFlow();
+		
+		
+		Buyer *selectedBuyer=buyercompute->getSelectedBuyer();
+		
+		std::cout<<"Buyer: "<<selectedBuyer->getName()<<" has exchange rate: "<<selectedBuyer->getExchangeRate()
+		<<" and a estimated purchase of "<<selectedBuyer->getEstPurchase()<<std::endl;
+		
+		std::cout<<"Would you like to trade with "<<selectedBuyer->getName()<<" Y/N"<<std::endl;
+		
+		std::cin >> Y_N;
+		
+	
+		
+		do
+		{
+			if(Y_N == 'Y' || Y_N == 'y')
+			{
+				//pass buyers' name, exchange rate, and estimated purchase.
+				cout << "Transaction successfully completed!" << endl;
+				
+				//setName(user2->getName());
+				//setExchangeRate(user2->getExchangeRate());
+				//setPurchase(user2->getEstPurchase());
+				
+				break;
+			}
+			
+			else if(Y_N == 'N' || Y_N == 'n')
+			{
+				cout << "Transaction cancelled. Have a nice day!" << endl;
+				break;
+			}
+			
+			else
+			{
+				cout << "Error: Invalid Input" << endl;
+				fl = true;
+				
+				std::cout<<"Buyer: "<<selectedBuyer->getName()<<" has exchange rate: "<<selectedBuyer->getExchangeRate()
+				<<" and a estimated purchase of "<<selectedBuyer->getEstPurchase()<<std::endl;
+		
+				std::cout<<"Would you like to trade with "<<selectedBuyer->getName()<<" Y/N"<<std::endl;
+				
+				cin >> Y_N;
+			}
+		
+		}while(fl);
+		
+	}
+
+	else
+	{
+		cout << "There is no match" << endl;
+	}
+}
+
 int main(int argc, const char * argv[]) {
   clear();
 
@@ -351,6 +508,7 @@ int main(int argc, const char * argv[]) {
         break;
       case 2:
         clear();
+        SellerOptions();
         error = "";
         cin >> sbinp;
         break;
