@@ -503,18 +503,6 @@ int main(int argc, const char * argv[]) {
 
   sys.loadMap("res/Map", ',');
 
-  // if(sys.getLoggedInUser().getTransactionHistory().size() > 0) {
-  //   for(Transaction t: sys.getLoggedInUser().getTransactionHistory()) {
-  //     cout << t.getName() << endl;
-  //     cout << t.getExchangeRate() << endl;
-  //     cout << t.getPurchase() << endl;
-  //   }
-  // }
-
-  // Transaction t("name",2.2,4.4);
-  // sys.getLoggedInUser().addTransaction(t);
-  // sys.save();
-
   string error = "";
   int inp = 0;
 
@@ -522,7 +510,7 @@ int main(int argc, const char * argv[]) {
 	  //Prints Flexbucks greeting screen
     printGreetingScreen();
     cout << sys.getLoggedInUser().titlePrint();
-		
+
     cout << sys.printMap();
     cout << "\nReitz Union Food Court Map\nKey: P = Panda Express, C = Croutons, J = Papa John's\nW = Wendy's, S = Starbucks, T = Pollo Tropical, x = Wall\n\n";
 
