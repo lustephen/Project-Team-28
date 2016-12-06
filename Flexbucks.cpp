@@ -158,8 +158,9 @@ bool Flexbucks::removeUser(string user) {
 //Gets Accounted information
 Account& Flexbucks::getLoggedInUser() {
   return this -> loggedInAcc;
+}
 
-//Returns string (to be printed out) which is a layout of the Reitz Union 
+//Returns string (to be printed out) which is a layout of the Reitz Union
 string Flexbucks::printMap() {
   string res = "";
   for(int i=0; i < this -> map.size(); i++) {

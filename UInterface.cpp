@@ -140,7 +140,7 @@ void BuyerOptions() {
 	double varEstPurchase;
 	double varExchangeRate;
 	int count = 0;
-	//Asks for Estimated Purchase cost and Troubleshoots for invalid inputs 
+	//Asks for Estimated Purchase cost and Troubleshoots for invalid inputs
 	while (count == 0) {
 		std::cout << "You have chosen to be a Buyer, Please fill out below" << std::endl << "Enter your Estimated purchase cost $(1.00 - 40.00): ";
 		std::cin >> varEstPurchase;
@@ -187,7 +187,7 @@ void BuyerOptions() {
 				std::cin.clear();
 				std::cin.ignore(1000, '\n');
 			}
-			//If user wants to continue breaks out of while loops 
+			//If user wants to continue breaks out of while loops
 			if (decision == "Y" || decision == "y") {
 				staller = 1;
 				count = 1;
@@ -208,7 +208,7 @@ void BuyerOptions() {
 						staller = 1;
 						count = 0;
 					}
-					//If users says no then program will look for seller based on the current preferences 
+					//If users says no then program will look for seller based on the current preferences
 					//Breaks out of while loops and continues program
 					else if (decision2 == "N" || decision2 == "n") {
 						holder = 1;
@@ -260,13 +260,13 @@ void BuyerOptions() {
 		{
 			if(Y_N == 'Y' || Y_N == 'y')
 			{
-				//if User goes through transaction the Name exchange rate of seller and the purcahse cost of user is stored in tranaction object 
+				//if User goes through transaction the Name exchange rate of seller and the purcahse cost of user is stored in tranaction object
 				cout << "Transaction successfully completed!" << endl;
         Transaction t (selectedSeller->getName(), selectedSeller->getExchangeRate(), user->getEstPurchase());
         sys.getLoggedInUser().addTransaction(t);
 		//saves transaction to .txt file
         sys.save();
-				//functions that are used to pass to transaction 
+				//functions that are used to pass to transaction
 				// setName(selectedSeller->getName());
 				// setExchangeRate(selectedSeller->getExchangeRate());
 				// setPurchase(user->getEstPurchase());
@@ -379,7 +379,7 @@ void SellerOptions()
 						sholder = 1;
 						sstaller = 1;
 						scount = 1;
-					
+
 					}
 					else {	//error sholder loop, trouble shoot for user input errors
 						std::cout << "Invalid choice, Please try again." << std::endl;
@@ -522,17 +522,10 @@ int main(int argc, const char * argv[]) {
 	  //Prints Flexbucks greeting screen
     printGreetingScreen();
     cout << sys.getLoggedInUser().titlePrint();
-<<<<<<< HEAD
-	//Prints map for visual aid
-    cout << sys.printMap();
-	//Prints out main menu for user to select an option
-=======
 		
-		cout <<
     cout << sys.printMap();
     cout << "\nReitz Union Food Court Map\nKey: P = Panda Express, C = Croutons, J = Papa John's\nW = Wendy's, S = Starbucks, T = Pollo Tropical, x = Wall\n\n";
 
->>>>>>> origin/master
     printMainMenu();
 
     cout << error;
