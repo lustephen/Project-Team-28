@@ -125,6 +125,11 @@ void clear() {
 void printGreetingScreen() {
   cout << functions::readFile("res/welcomescreen.txt");
 }
+
+//Function to print out transaction history greeting screen of FlexBucks Market
+void printTransactionHistoryGreetingScreen() {
+  cout << functions::readFile("res/transactionhistorywelcomescreen.txt");
+}
 //Function to print out Main Menu after logging in
 //User can select to Buy/Sell, View their transaction history, or exit the program
 void printMainMenu() {
@@ -552,6 +557,7 @@ int main(int argc, const char * argv[]) {
       case 3:
 		  //If user wants to see transaction history, reads .txt file and displays transaction history
         clear();
+        printTransactionHistoryGreetingScreen();
         for(Transaction t: sys.getLoggedInUser().getTransactionHistory()) {
           cout << "Transaction " << count << ": " << t.getTransactionType() << endl;
           cout << "\tName: " << t.getName() << endl;
