@@ -9,16 +9,19 @@ class Transaction
 	//Transaction saves the Name, exchange rate of the Seller/Buyer to the user and the purchase cost
     private:
         std::string name;
+        std::string transactionType;
         double exchangeRate;
         double purchase;
 	//Constructor and methods used to set the Name, Exchange Rate, and Purchase cost variables
     public:
-        Transaction(std::string,double,double);
+        Transaction(std::string,double,double,std::string);
         Transaction();
         void setName(std::string);
         void setExchangeRate(double);
         void setPurchase(double);
+        void setTransactionType(std::string);
 
+        std::string getTransactionType();
         std::string getName();
         double getExchangeRate();
         double getPurchase();
@@ -30,13 +33,14 @@ class Transaction
       		os << transact.name << '\n';
       		os << transact.exchangeRate << '\n';
       		os << transact.purchase << '\n';
+          os << transact.transactionType << '\n';
       		return os;
       	}
         // Extraction operator
       	friend std::istream& operator>>(std::istream& is, Transaction& transact)
       	{
       		// read in individual members of s
-      		is >> transact.name >> transact.exchangeRate >> transact.purchase;
+      		is >> transact.name >> transact.exchangeRate >> transact.purchase >> transact.transactionType;
       		return is;
       	}
 };

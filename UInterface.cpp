@@ -262,7 +262,7 @@ void BuyerOptions() {
 			{
 				//if User goes through transaction the Name exchange rate of seller and the purcahse cost of user is stored in tranaction object
 				cout << "Transaction successfully completed!" << endl;
-        Transaction t (selectedSeller->getName(), selectedSeller->getExchangeRate(), user->getEstPurchase());
+        Transaction t (selectedSeller->getName(), selectedSeller->getExchangeRate(), user->getEstPurchase(),"Bought");
         sys.getLoggedInUser().addTransaction(t);
 		//saves transaction to .txt file
         sys.save();
@@ -432,6 +432,11 @@ void SellerOptions()
 			{
 				//pass buyers' name, exchange rate, and estimated purchase.
 				cout << "Transaction successfully completed!" << endl;
+
+        Transaction t (selectedBuyer->getName(), selectedBuyer->getExchangeRate(), selectedBuyer->getEstPurchase(),"Sold");
+        sys.getLoggedInUser().addTransaction(t);
+		//saves transaction to .txt file
+        sys.save();
 				//function that are used to pass to transaction
 				//setName(user2->getName());
 				//setExchangeRate(user2->getExchangeRate());
@@ -548,10 +553,10 @@ int main(int argc, const char * argv[]) {
 		  //If user wants to see transaction history, reads .txt file and displays transaction history
         clear();
         for(Transaction t: sys.getLoggedInUser().getTransactionHistory()) {
-          cout << "Transaction: " << count << endl;
+          cout << "Transaction " << count << ": " << t.getTransactionType() << endl;
           cout << "\tName: " << t.getName() << endl;
           cout << "\tRate: " << t.getExchangeRate() << endl;
-          cout << "\tPurchased: " << t.getPurchase() << endl;
+          cout << "\tPurchased: " << t.getPurchase() << endl << endl;
           count++;
         }
         cout << "\nEnter m to return to the (m)enu: ";
